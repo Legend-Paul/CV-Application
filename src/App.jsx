@@ -1,9 +1,11 @@
 import PersonalInfo from "./personal info/personalInfo";
+import Header from "./header/header";
 import "./App.css";
+import "./index.css";
 function App() {
     return (
         <div className="App">
-            <h1>CV Application</h1>
+            <Header />
             <PersonalInfo />
         </div>
     );

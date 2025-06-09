@@ -1,4 +1,6 @@
 * {
+    margin: 0;
+    padding: 0;
     font-family: "Ancizar Serif", serif;
     font-optical-sizing: auto;
 
@@ -12,4 +14,6 @@
     --pink: #ff7f7f;
     --black: #010b13;
     --white: #fffff0;
+    --light-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --heavy-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
