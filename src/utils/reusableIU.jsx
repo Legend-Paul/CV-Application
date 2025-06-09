@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./reusableIU.css";
 
 // Input Componetc
-function Input({ inputTitle, defaultType = "text" }) {
+function Input({ inputTitle, defaultType = "text", placeholder }) {
     const [value, setValue] = useState("");
     return (
         <>
@@ -12,6 +12,7 @@ function Input({ inputTitle, defaultType = "text" }) {
                     type={defaultType}
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
+                    placeholder={placeholder}
                 />
             </label>
         </>

@@ -30,7 +30,7 @@ function PersonalInfo() {
     );
 }
 
-function NewInputField({ hadleAddField }) {
+function NewInputFieldSelection({ hadleAddField }) {
     return (
         <select onChange={hadleAddField}>
             <option disabled selected>
@@ -49,21 +49,29 @@ function PersonalInfoFields({ addField, hadleAddField }) {
     return (
         <div className="info-fields">
             <div className="input-field">
-                <Input inputTitle="Name" />
-                <Input inputTitle="Email" type={"email"} />
-                <Input inputTitle="Phone" type={"tel"} />
+                <Input inputTitle="Name" placeholder={"John Doe"} />
+                <Input
+                    inputTitle="Email"
+                    type={"email"}
+                    placeholder={"example@gmail.com"}
+                />
+                <Input
+                    inputTitle="Phone"
+                    type={"tel"}
+                    placeholder={"+254708521286"}
+                />
                 <Input inputTitle="Address" type={"text"} />
-                {addField && <Input inputTitle="Email" type={"email"} />}
+                {addField && (
+                    <Input
+                        inputTitle="Email"
+                        type={"email"}
+                        placeholder={"example@gmail.com"}
+                    />
+                )}
             </div>
             <div className="buttons-container">
-                <NewInputField hadleAddField={hadleAddField} />
-                <Button
-                    buttonTitle="Save Details"
-                    bgc={"var(--blue)"}
-                    onClick={() => {
-                        console.log("Add button clicked");
-                    }}
-                />
+                <NewInputFieldSelection hadleAddField={hadleAddField} />
+                <Button buttonTitle="Save Details" bgc={"var(--blue)"} />
             </div>
         </div>
     );

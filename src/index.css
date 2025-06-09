@@ -1,12 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    font-family: "Ancizar Serif", serif;
-    font-optical-sizing: auto;
-
-    font-style: normal;
-}
-
 :root {
     --primary-color: #ff7f7f;
     --secondary-color: #f4402f;
@@ -18,9 +9,16 @@
     --light-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     --heavy-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
-
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Ancizar Serif", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    color: var(--black);
+}
 section {
-    margin-top: 1rem;
+    padding: 1rem 1rem 1rem 0;
     max-width: 400px;
     padding-right: 2rem;
     border-right: 2px solid var(--medium-grey);

@@ -33,6 +33,10 @@
                 font-weight: 700;
                 text-align: center;
                 place-self: end;
+                color: var(--white);
+                abbr {
+                    color: var(--white);
+                }
             }
             p {
                 font-size: 1.25rem;

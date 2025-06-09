@@ -4,10 +4,14 @@ label {
     margin-bottom: 1rem;
     input {
         width: 25rem;
-        height: 2.5rem;
+        height: 2.25rem;
         margin: 4px 0;
         box-sizing: border-box;
         padding: 0.5rem;
+    }
+    textarea {
+        padding: 0.5rem;
+        height: 8rem;
     }
 }
 
@@ -27,6 +31,7 @@ label {
 
 /* Accordion style */
 .pannel {
+    border-bottom: 2px solid var(--medium-grey);
     display: flex;
     align-items: center;
     justify-content: space-between;
