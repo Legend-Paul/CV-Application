@@ -20,17 +20,7 @@ function PersonalInfo() {
 }
 
 function PersonalInfoFields() {
-    const addNewField = () => {
-        return (
-            <select>
-                <option value="text">Text Field</option>
-                <option value="email">Email Field</option>
-                <option value="date">Date Field</option>
-                <option value="number">Number Field</option>
-                <option value="tel">Tel Filed</option>
-            </select>
-        );
-    };
+    const addNewField = () => {};
     return (
         <div className="info-fields">
             <div className="input-field">
