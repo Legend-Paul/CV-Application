@@ -1,15 +1,5 @@
-* {
-    font-family: "Ancizar Serif", serif;
-    font-optical-sizing: auto;
-
-    font-style: normal;
-}
-
-:root {
-    --primary-color: #0d72ba;
-    --secondary-color: #f4402f;
-    --medium-grey: #7f7f7f;
-    --pink: #ff7f7f;
-    --black: #010b13;
-    --white: #fffff0;
+.main-content {
+    padding: 1rem;
+    max-width: 1200px;
+    margin: auto;
 }

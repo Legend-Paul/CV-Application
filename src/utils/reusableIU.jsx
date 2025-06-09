@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import "./inputFields.css";
+import "./reusableIU.css";
 
-function Input({ inputTitle }) {
+function Input({ inputTitle, type }) {
     const [value, setValue] = useState("");
     return (
         <>
             <label>
                 {inputTitle}
                 <input
-                    type="text"
+                    type={type}
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
                 />

@@ -12,8 +12,16 @@
     --secondary-color: #f4402f;
     --medium-grey: #7f7f7f;
     --pink: #ff7f7f;
+    --moderate-green: #2bae66;
     --black: #010b13;
+
     --white: #fffff0;
     --light-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     --heavy-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+section {
+    display: grid;
+    /* place-items: center; */
+    gap: 1rem;
 }

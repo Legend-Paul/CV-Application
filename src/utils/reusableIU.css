@@ -1,0 +1,26 @@
+label {
+    display: grid;
+    gap: 0.5rem;
+    input {
+        width: 25rem;
+        height: 2.5rem;
+        margin: 4px 0;
+        box-sizing: border-box;
+        padding: 0.5rem;
+    }
+}
+.button {
+    width: 10rem;
+    height: 2.5rem;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 0.25rem;
+    box-shadow: var(--light-shadow);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+.button:hover {
+    box-shadow: var(--heavy-shadow);
+    transform: translateY(-2px);
+}

@@ -15,7 +15,10 @@ function Header() {
                         />
                     </div>
                     <div className="header-text">
-                        <h1>CV Application</h1>
+                        <h1>
+                            {" "}
+                            <abbr title="CURRICULUM VITAE">CV</abbr> APPLICATION
+                        </h1>
                         <p>Fill out the form below to create your CV</p>
                     </div>
                 </div>
