@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import "./reusableIU.css";
 
 // Input Componetc
-function Input({ inputTitle, type }) {
+function Input({ inputTitle, defaultType = "text" }) {
     const [value, setValue] = useState("");
     return (
         <>
             <label>
                 {inputTitle}
                 <input
-                    type={type}
+                    type={defaultType}
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
                 />
@@ -53,9 +53,9 @@ function Accordion({ sectionName, isOpen, onClick }) {
         <div className="pannel" onClick={onClick}>
             <h2>{sectionName}</h2>
             {isOpen ? (
-                <i class="bi bi-chevron-down"></i>
+                <i className="bi bi-chevron-down"></i>
             ) : (
-                <i class="bi bi-chevron-right"></i>
+                <i className="bi bi-chevron-right"></i>
             )}
         </div>
     );

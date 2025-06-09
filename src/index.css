@@ -20,6 +20,7 @@
 }
 
 section {
+    margin-top: 1rem;
     max-width: 400px;
     padding-right: 2rem;
     border-right: 2px solid var(--medium-grey);
