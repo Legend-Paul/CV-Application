@@ -8,20 +8,21 @@
 }
 
 :root {
-    --primary-color: #0d72ba;
+    --primary-color: #ff7f7f;
     --secondary-color: #f4402f;
     --medium-grey: #7f7f7f;
-    --pink: #ff7f7f;
+    --blue: #0d72ba;
     --moderate-green: #2bae66;
     --black: #010b13;
-
     --white: #fffff0;
     --light-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     --heavy-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
 section {
+    max-width: 400px;
+    padding-right: 2rem;
+    border-right: 2px solid var(--medium-grey);
     display: grid;
-    /* place-items: center; */
     gap: 1rem;
 }
