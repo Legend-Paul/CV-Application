@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Input, Button, Accordion, TextArea } from "../utils/reusableIU";
-import "./personalInfo.css";
+import "./cvSection.css";
 
 // Mock components for demonstration
 
-function PersonalInfo({ defaultFields, heading }) {
+function Cvsection({ defaultFields, heading }) {
     const [isOpen, setIsOpen] = useState(true);
 
     const toggleAccordion = () => setIsOpen(!isOpen);
@@ -17,7 +17,7 @@ function PersonalInfo({ defaultFields, heading }) {
                 onClick={toggleAccordion}
             />
             {isOpen && (
-                <PersonalInfoFields
+                <CvsectionFields
                     defaultFields={defaultFields}
                     heading={heading}
                 />
@@ -43,7 +43,7 @@ function NewInputFieldSelection({ handleAddFieldType, selectedType }) {
     );
 }
 
-function PersonalInfoFields({ defaultFields }) {
+function CvsectionFields({ defaultFields }) {
     const initialState = {};
     const [dialogValues, setDialogValues] = useState({
         state: false,
@@ -52,7 +52,6 @@ function PersonalInfoFields({ defaultFields }) {
     });
     const [inputValueObj, setInputValueObj] = useState({ ...initialState });
     const [errorMsgObj, setErrorMsgObj] = useState({ ...initialState });
-    const [previousBlur, setPreviousBlur] = useState({ ...initialState });
     const [canSubmit, setCanSubmit] = useState(false);
     const [dynamicFields, setDynamicFields] = useState([]);
 
@@ -76,7 +75,7 @@ function PersonalInfoFields({ defaultFields }) {
             // Handle regular form field changes
             const { type, name, value } = e.target;
             setInputValueObj(addFieldToObj(inputValueObj, type, name, value));
-            removeErrorMsg();
+
             setCanSubmit(true);
         }
     };
@@ -84,7 +83,6 @@ function PersonalInfoFields({ defaultFields }) {
     const handleReset = () => {
         setInputValueObj(initialState);
         setErrorMsgObj(initialState);
-        setPreviousBlur(initialState);
         setCanSubmit(false);
     };
 
@@ -108,20 +106,6 @@ function PersonalInfoFields({ defaultFields }) {
         }
     };
 
-    const removeErrorMsg = () => {
-        if (previousBlur.type && previousBlur.name) {
-            let stateObj = { ...errorMsgObj };
-            setErrorMsgObj(
-                addFieldToObj(
-                    stateObj,
-                    previousBlur.type,
-                    previousBlur.name,
-                    ""
-                )
-            );
-        }
-    };
-
     const addFieldToObj = (stateObj, type, name, value) => {
         return {
             ...stateObj,
@@ -134,8 +118,8 @@ function PersonalInfoFields({ defaultFields }) {
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i;
         const telRegex = /^\+\d{1,3}\d{9}$/;
 
-        if (type === "email" && value) {
-            if (!emailRegex.test(value)) {
+        if (type === "email") {
+            if (value && !emailRegex.test(value)) {
                 setErrorMsgObj(
                     addFieldToObj(
                         errorMsgObj,
@@ -144,12 +128,13 @@ function PersonalInfoFields({ defaultFields }) {
                         "Invalid Email Address"
                     )
                 );
+            } else {
+                checkInputValidity(type, value, name);
             }
-            setPreviousBlur({ type, name });
         }
 
-        if (type === "tel" && value) {
-            if (!telRegex.test(value)) {
+        if (type === "tel") {
+            if (value && !telRegex.test(value)) {
                 setErrorMsgObj(
                     addFieldToObj(
                         errorMsgObj,
@@ -158,9 +143,20 @@ function PersonalInfoFields({ defaultFields }) {
                         "Invalid Phone Number (format: +1234567890)"
                     )
                 );
+            } else {
+                checkInputValidity(type, value, name);
             }
-            setPreviousBlur({ type, name });
         }
+    };
+
+    const checkInputValidity = (type, value, name) => {
+        let obj = { ...errorMsgObj };
+        if (obj[type]) {
+            Object.keys(obj[type]).length > 1 || value
+                ? delete obj[type][name]
+                : delete obj[type];
+        }
+        setErrorMsgObj(obj);
     };
 
     const handleSubmit = () => {
@@ -177,7 +173,7 @@ function PersonalInfoFields({ defaultFields }) {
             <div className="form-container">
                 <div className="input-field">
                     {/* Render default fields */}
-                    {console.log(defaultFields)}
+
                     {defaultFields.map((field) => {
                         if (field.type === "textarea") {
                             return (
@@ -265,16 +261,21 @@ function PersonalInfoFields({ defaultFields }) {
                         type="button"
                         onClick={handleSubmit}
                         style={{
-                            color: canSubmit
-                                ? "var(--blue)"
-                                : "var(--light-blue)",
-                            borderColor: canSubmit
-                                ? "var(--blue)"
-                                : "var(--light-blue)",
-                            cursor: canSubmit ? "pointer" : "not-allowed",
+                            color:
+                                Object.keys(errorMsgObj).length < 1 && canSubmit
+                                    ? "var(--blue)"
+                                    : "var(--light-blue)",
+                            borderColor:
+                                Object.keys(errorMsgObj).length < 1 && canSubmit
+                                    ? "var(--blue)"
+                                    : "var(--light-blue)",
+                            cursor:
+                                Object.keys(errorMsgObj).length < 1 && canSubmit
+                                    ? "pointer"
+                                    : "not-allowed",
                             title: "Submit",
                         }}
-                        disabled={!canSubmit}
+                        disabled={!Object.keys(errorMsgObj).length < 1}
                     >
                         ✓
                     </button>
@@ -324,4 +325,4 @@ function PersonalInfoFields({ defaultFields }) {
     );
 }
 
-export default PersonalInfo;
+export default Cvsection;
