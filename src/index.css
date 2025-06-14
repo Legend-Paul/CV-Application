@@ -20,11 +20,16 @@
 }
 section {
     padding: 1rem 1rem 1rem 0;
-    max-width: 400px;
+    max-width: 40%;
     padding-right: 2rem;
     border-right: 2px solid var(--medium-grey);
     display: grid;
     gap: 1rem;
+}
+.cv-section {
+    .info-fields {
+        padding-left: 1rem;
+    }
 }
 
 i {

@@ -4,13 +4,13 @@ import "./cvSection.css";
 
 // Mock components for demonstration
 
-function Cvsection({ defaultFields, heading }) {
-    const [isOpen, setIsOpen] = useState(true);
-
+function Cvsection({ open, defaultFields, heading, className }) {
+    const [isOpen, setIsOpen] = useState(open);
     const toggleAccordion = () => setIsOpen(!isOpen);
+    console.log(className);
 
     return (
-        <section className="personal-info">
+        <section className={className}>
             <Accordion
                 sectionName={heading}
                 isOpen={isOpen}
@@ -166,10 +166,7 @@ function CvsectionFields({ defaultFields }) {
     };
 
     return (
-        <div
-            className="info-fields"
-            style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}
-        >
+        <div className="info-fields">
             <div className="form-container">
                 <div className="input-field">
                     {/* Render default fields */}

@@ -20,11 +20,11 @@
         align-items: center;
         border: 0.125rem solid var(--red);
         background: none;
-        height: 2rem;
-        width: 2rem;
+        height: 1.75rem;
+        width: 1.75rem;
         color: var(--red);
         border-radius: 50%;
-        font-size: 1.5rem;
+        font-size: 1rem;
         cursor: pointer;
     }
 }
