@@ -237,46 +237,40 @@ function PersonalInfoFields({ defaultFields }) {
                     })}
                 </div>
 
-                <div
-                    className="buttons-container"
-                    style={{ display: "flex", gap: "10px", marginTop: "20px" }}
-                >
+                <div className="buttons-container">
                     <button
+                        className="btns"
                         type="button"
                         onClick={handleReset}
                         style={{
-                            background: "none",
-                            border: "none",
-                            fontSize: "20px",
-                            color: "#dc3545",
-                            cursor: "pointer",
                             title: "Reset Form",
                         }}
                     >
                         ↻
                     </button>
                     <button
+                        className="btns"
                         type="button"
                         onClick={handleDialogControl}
                         style={{
-                            background: "none",
-                            border: "none",
-                            fontSize: "20px",
-                            color: "#28a745",
-                            cursor: "pointer",
+                            color: "var(--moderate-green)",
+                            borderColor: "var(--moderate-green)",
                             title: "Add Field",
                         }}
                     >
                         ➕
                     </button>
                     <button
+                        className="btns"
                         type="button"
                         onClick={handleSubmit}
                         style={{
-                            background: "none",
-                            border: "none",
-                            fontSize: "20px",
-                            color: canSubmit ? "#007bff" : "#6c757d",
+                            color: canSubmit
+                                ? "var(--blue)"
+                                : "var(--light-blue)",
+                            borderColor: canSubmit
+                                ? "var(--blue)"
+                                : "var(--light-blue)",
                             cursor: canSubmit ? "pointer" : "not-allowed",
                             title: "Submit",
                         }}
@@ -288,43 +282,10 @@ function PersonalInfoFields({ defaultFields }) {
             </div>
 
             {dialogValues.state && (
-                <div
-                    className="dialog-overlay"
-                    style={{
-                        position: "fixed",
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        backgroundColor: "rgba(0,0,0,0.5)",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        zIndex: 1000,
-                    }}
-                >
-                    <div
-                        className="dialog-content"
-                        style={{
-                            backgroundColor: "white",
-                            padding: "20px",
-                            borderRadius: "8px",
-                            minWidth: "300px",
-                            boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
-                        }}
-                    >
-                        <div
-                            className="select-input-type"
-                            style={{ marginBottom: "15px" }}
-                        >
-                            <p
-                                style={{
-                                    margin: "0 0 10px 0",
-                                    fontWeight: "bold",
-                                }}
-                            >
-                                Select input type
-                            </p>
+                <div className="dialog-overlay">
+                    <div className="dialog-content">
+                        <div className="select-input-type">
+                            <p>Select input type</p>
                             <NewInputFieldSelection
                                 handleAddFieldType={handleDialogType}
                                 selectedType={dialogValues.type}
@@ -338,24 +299,16 @@ function PersonalInfoFields({ defaultFields }) {
                             handleBlur={handleBlur}
                             isDialog={dialogValues}
                         />
-                        <div
-                            className="buttons-container"
-                            style={{
-                                display: "flex",
-                                gap: "10px",
-                                marginTop: "20px",
-                                justifyContent: "flex-end",
-                            }}
-                        >
+                        <div className="buttons-container">
                             <Button
                                 buttonTitle="Cancel"
-                                bgc="#dc3545"
+                                bgc="var(--red)"
                                 active="active"
                                 onClick={handleDialogControl}
                             />
                             <Button
                                 buttonTitle="Add Field"
-                                bgc="#28a745"
+                                bgc="var(--moderate-green)"
                                 active={
                                     dialogValues.fieldName.trim()
                                         ? "active"

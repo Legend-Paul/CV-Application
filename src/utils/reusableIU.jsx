@@ -17,7 +17,7 @@ const Input = ({
     const error = errorMsgObj?.[defaultType]?.[name];
 
     return (
-        <div className="input-group" style={{ marginBottom: "15px" }}>
+        <div className="input-group">
             <label>
                 {name}
                 <input
