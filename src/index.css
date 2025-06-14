@@ -1,8 +1,9 @@
 :root {
     --primary-color: #ff7f7f;
-    --secondary-color: #f4402f;
+    --red: #f4402f;
     --medium-grey: #7f7f7f;
     --blue: #0d72ba;
+    --light-blue: #76c3fa;
     --moderate-green: #2bae66;
     --black: #010b13;
     --white: #fffff0;
@@ -24,4 +25,27 @@ section {
     border-right: 2px solid var(--medium-grey);
     display: grid;
     gap: 1rem;
+}
+
+i {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: 250px;
+    padding: 1rem;
+    .dialog-cont {
+        display: grid;
+        gap: 1rem;
+        .select-input-type {
+            display: flex;
+
+            justify-content: space-between;
+        }
+    }
 }

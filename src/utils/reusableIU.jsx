@@ -1,34 +1,65 @@
-import React, { useState } from "react";
 import "./reusableIU.css";
 
-// Input Componetc
-function Input({ inputTitle, defaultType = "text", placeholder }) {
-    const [value, setValue] = useState("");
+// Input Component
+const Input = ({
+    inputValueObj,
+    handleOnchange,
+    name,
+    defaultType = "text",
+    placeholder,
+    handleBlur,
+    errorMsgObj,
+    isDialog,
+}) => {
+    const value = isDialog
+        ? isDialog.fieldName
+        : inputValueObj[defaultType]?.[name] || "";
+    const error = errorMsgObj?.[defaultType]?.[name];
+
     return (
-        <>
+        <div className="input-group" style={{ marginBottom: "15px" }}>
             <label>
-                {inputTitle}
+                {name}
                 <input
                     type={defaultType}
+                    name={name}
                     value={value}
-                    onChange={(e) => setValue(e.target.value)}
                     placeholder={placeholder}
+                    onChange={handleOnchange}
+                    onBlur={handleBlur}
+                    style={{
+                        border: error ? "2px solid #dc3545" : "1px solid #ccc",
+                    }}
                 />
+                {error && <span>{error}</span>}
             </label>
-        </>
+        </div>
     );
-}
+};
 
 // TextArea Component
-function TextArea({ textareaTitle }) {
-    const [value, setValue] = useState("");
+function TextArea({
+    inputValueObj,
+    name,
+    defaultType,
+    handleOnchange,
+    placeholder,
+}) {
+    let value = "";
+    if (inputValueObj[defaultType]) {
+        value = inputValueObj[defaultType]?.[name] || "";
+    }
+
     return (
         <>
             <label>
-                {textareaTitle}
+                {name}
                 <textarea
+                    type={defaultType}
                     value={value}
-                    onChange={(e) => setValue(e.target.value)}
+                    name={name}
+                    onChange={handleOnchange}
+                    placeholder={placeholder}
                 ></textarea>
             </label>
         </>
@@ -36,19 +67,20 @@ function TextArea({ textareaTitle }) {
 }
 
 // Button Component
-function Button({ buttonTitle, bgc, onClick }) {
-    return (
-        <button
-            className="button"
-            style={{ backgroundColor: bgc }}
-            onClick={onClick}
-        >
-            {buttonTitle}
-        </button>
-    );
-}
+const Button = ({ buttonTitle, bgc, active, onClick }) => (
+    <button
+        style={{
+            backgroundColor: bgc,
+            opacity: active === "inactive" ? 0.7 : 1,
+        }}
+        onClick={onClick}
+        type="button"
+    >
+        {buttonTitle}
+    </button>
+);
 
-// Arccodion Componenet
+// Arccodion Component
 function Accordion({ sectionName, isOpen, onClick }) {
     return (
         <div className="pannel" onClick={onClick}>
