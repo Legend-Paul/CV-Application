@@ -18,11 +18,14 @@
     font-style: normal;
     color: var(--black);
 }
-section {
-    padding-right: 2rem;
+main {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
+}
+section {
+    padding-right: 2rem;
+
     .section-fields-cont {
         padding: 1rem 1rem 1rem 0;
         border-right: 2px solid var(--medium-grey);

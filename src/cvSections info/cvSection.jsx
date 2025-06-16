@@ -42,7 +42,17 @@ function NewInputFieldSelection({ handleAddFieldType, selectedType }) {
     );
 }
 
-function Cvsection({ open, defaultFields, heading, className }) {
+function Cvsection({
+    open,
+    defaultFields,
+    heading,
+    className,
+    cvDataValues,
+    setCvDataValues,
+    activeCvSection,
+    setActiveCvSection,
+    index,
+}) {
     const initialState = {};
     const [dialogValuesObj, setDialogValuesObj] = useState({
         state: false,
@@ -50,12 +60,22 @@ function Cvsection({ open, defaultFields, heading, className }) {
         fieldName: "",
     });
     const [isOpen, setIsOpen] = useState(open);
-    const toggleAccordion = () => setIsOpen(!isOpen);
-    const [inputValueObj, setInputValueObj] = useState({ ...initialState });
+
     const [errorMsgObj, setErrorMsgObj] = useState({ ...initialState });
     const [canSubmit, setCanSubmit] = useState(false);
     const [dynamicFields, setDynamicFields] = useState([]);
-    const [overview, setOverview] = useState(false);
+    let isCvSectionActive = activeCvSection.index == index;
+
+    const toggleAccordion = (e) => {
+        console.log(e.target.dataset.index);
+        isOpen ? setIsOpen(true) : setIsOpen(!isOpen);
+        setActiveCvSection({
+            ...activeCvSection,
+            name: heading,
+            index: e.target.dataset.index,
+        });
+    };
+    console.log(activeCvSection, index, isCvSectionActive);
 
     const handleDialogType = (e) => {
         setDialogValuesObj({ ...dialogValuesObj, type: e.target.value });
@@ -79,14 +99,14 @@ function Cvsection({ open, defaultFields, heading, className }) {
         } else {
             // Handle regular form field changes
             const { type, name, value } = e.target;
-            setInputValueObj(addFieldToObj(inputValueObj, type, name, value));
+            setCvDataValues(addFieldToObj(cvDataValues, type, name, value));
 
             setCanSubmit(true);
         }
     };
 
     const handleReset = () => {
-        setInputValueObj(initialState);
+        setCvDataValues(initialState);
         setErrorMsgObj(initialState);
         setCanSubmit(false);
         setDynamicFields([]);
@@ -167,7 +187,7 @@ function Cvsection({ open, defaultFields, heading, className }) {
 
     const handleSubmit = () => {
         if (canSubmit) {
-            setOverview(true);
+            alert("submited");
         }
     };
 
@@ -177,167 +197,174 @@ function Cvsection({ open, defaultFields, heading, className }) {
                 <Accordion
                     sectionName={heading}
                     isOpen={isOpen}
+                    index={index}
+                    isCvSectionActive={isCvSectionActive}
                     onClick={toggleAccordion}
+                    cvDataValues={cvDataValues}
+                    setCvDataValues={setCvDataValues}
                 />
-                <div className="info-fields">
-                    <div className="form-container">
-                        <div className="input-field">
-                            {/* Render default fields */}
+                {isCvSectionActive && isOpen && (
+                    <div className="info-fields">
+                        <div className="form-container">
+                            <div className="input-field">
+                                {/* Render default fields */}
 
-                            {defaultFields.map((field) => {
-                                if (field.type === "textarea") {
+                                {defaultFields.map((field) => {
+                                    if (field.type === "textarea") {
+                                        return (
+                                            <TextArea
+                                                key={field.id}
+                                                cvDataValues={cvDataValues}
+                                                name={"Description"}
+                                                defaultType="textarea"
+                                                handleOnchange={handleOnChange}
+                                                placeholder={field.placeholder}
+                                                handleBlur={handleBlur}
+                                                errorMsgObj={errorMsgObj}
+                                            />
+                                        );
+                                    }
                                     return (
-                                        <TextArea
+                                        <Input
                                             key={field.id}
-                                            inputValueObj={inputValueObj}
-                                            name={"Description"}
-                                            defaultType="textarea"
+                                            cvDataValues={cvDataValues}
                                             handleOnchange={handleOnChange}
+                                            name={field.name}
+                                            defaultType={field.type}
                                             placeholder={field.placeholder}
                                             handleBlur={handleBlur}
                                             errorMsgObj={errorMsgObj}
                                         />
                                     );
-                                }
-                                return (
-                                    <Input
-                                        key={field.id}
-                                        inputValueObj={inputValueObj}
-                                        handleOnchange={handleOnChange}
-                                        name={field.name}
-                                        defaultType={field.type}
-                                        placeholder={field.placeholder}
-                                        handleBlur={handleBlur}
-                                        errorMsgObj={errorMsgObj}
-                                    />
-                                );
-                            })}
-                            {/* Render dynamic fields */}
-                            {dynamicFields.map((field) => {
-                                if (field.type === "textarea") {
+                                })}
+                                {/* Render dynamic fields */}
+                                {dynamicFields.map((field) => {
+                                    if (field.type === "textarea") {
+                                        return (
+                                            <TextArea
+                                                key={field.id}
+                                                cvDataValues={cvDataValues}
+                                                name={"Description"}
+                                                defaultType="textarea"
+                                                handleOnchange={handleOnChange}
+                                                placeholder={field.placeholder}
+                                                handleBlur={handleBlur}
+                                                errorMsgObj={errorMsgObj}
+                                            />
+                                        );
+                                    }
                                     return (
-                                        <TextArea
+                                        <Input
                                             key={field.id}
-                                            inputValueObj={inputValueObj}
-                                            name={"Description"}
-                                            defaultType="textarea"
+                                            cvDataValues={cvDataValues}
                                             handleOnchange={handleOnChange}
+                                            name={field.name}
+                                            defaultType={field.type}
                                             placeholder={field.placeholder}
                                             handleBlur={handleBlur}
                                             errorMsgObj={errorMsgObj}
                                         />
                                     );
-                                }
-                                return (
-                                    <Input
-                                        key={field.id}
-                                        inputValueObj={inputValueObj}
-                                        handleOnchange={handleOnChange}
-                                        name={field.name}
-                                        defaultType={field.type}
-                                        placeholder={field.placeholder}
-                                        handleBlur={handleBlur}
-                                        errorMsgObj={errorMsgObj}
-                                    />
-                                );
-                            })}
-                        </div>
+                                })}
+                            </div>
 
-                        <div className="buttons-container">
-                            <button
-                                className="btns"
-                                type="button"
-                                onClick={handleReset}
-                                style={{
-                                    title: "Reset Form",
-                                }}
-                            >
-                                ↻
-                            </button>
-                            <button
-                                className="btns"
-                                type="button"
-                                onClick={handleDialogControl}
-                                style={{
-                                    color: "var(--moderate-green)",
-                                    borderColor: "var(--moderate-green)",
-                                    title: "Add Field",
-                                }}
-                            >
-                                ➕
-                            </button>
-                            <button
-                                className="btns"
-                                type="button"
-                                onClick={handleSubmit}
-                                style={{
-                                    color:
-                                        Object.keys(errorMsgObj).length < 1 &&
-                                        canSubmit
-                                            ? "var(--blue)"
-                                            : "var(--light-blue)",
-                                    borderColor:
-                                        Object.keys(errorMsgObj).length < 1 &&
-                                        canSubmit
-                                            ? "var(--blue)"
-                                            : "var(--light-blue)",
-                                    cursor:
-                                        Object.keys(errorMsgObj).length < 1 &&
-                                        canSubmit
-                                            ? "pointer"
-                                            : "not-allowed",
-                                    title: "Submit",
-                                }}
-                                disabled={!Object.keys(errorMsgObj).length < 1}
-                            >
-                                ✓
-                            </button>
-                        </div>
-                    </div>
-
-                    {dialogValuesObj.state && (
-                        <div className="dialog-overlay">
-                            <div className="dialog-content">
-                                <div className="select-input-type">
-                                    <p>Select input type</p>
-                                    <NewInputFieldSelection
-                                        handleAddFieldType={handleDialogType}
-                                        selectedType={dialogValuesObj.type}
-                                    />
-                                </div>
-                                <Input
-                                    inputValueObj={inputValueObj}
-                                    handleOnchange={handleOnChange}
-                                    name="Input Title"
-                                    placeholder="e.g., Nationality, Date of Birth"
-                                    handleBlur={handleBlur}
-                                    isDialog={dialogValuesObj}
-                                />
-                                <div className="buttons-container">
-                                    <Button
-                                        buttonTitle="Cancel"
-                                        bgc="var(--red)"
-                                        active="active"
-                                        onClick={handleDialogControl}
-                                    />
-                                    <Button
-                                        buttonTitle="Add Field"
-                                        bgc="var(--moderate-green)"
-                                        active={
-                                            dialogValuesObj.fieldName.trim()
-                                                ? "active"
-                                                : "inactive"
-                                        }
-                                        onClick={handleAddField}
-                                    />
-                                </div>
+                            <div className="buttons-container">
+                                <button
+                                    className="btns"
+                                    type="button"
+                                    onClick={handleReset}
+                                    style={{
+                                        title: "Reset Form",
+                                    }}
+                                >
+                                    ↻
+                                </button>
+                                <button
+                                    className="btns"
+                                    type="button"
+                                    onClick={handleDialogControl}
+                                    style={{
+                                        color: "var(--moderate-green)",
+                                        borderColor: "var(--moderate-green)",
+                                        title: "Add Field",
+                                    }}
+                                >
+                                    ➕
+                                </button>
+                                <button
+                                    className="btns"
+                                    type="button"
+                                    onClick={handleSubmit}
+                                    style={{
+                                        color:
+                                            Object.keys(errorMsgObj).length <
+                                                1 && canSubmit
+                                                ? "var(--blue)"
+                                                : "var(--light-blue)",
+                                        borderColor:
+                                            Object.keys(errorMsgObj).length <
+                                                1 && canSubmit
+                                                ? "var(--blue)"
+                                                : "var(--light-blue)",
+                                        cursor:
+                                            Object.keys(errorMsgObj).length <
+                                                1 && canSubmit
+                                                ? "pointer"
+                                                : "not-allowed",
+                                        title: "Submit",
+                                    }}
+                                    disabled={
+                                        !Object.keys(errorMsgObj).length < 1
+                                    }
+                                >
+                                    ✓
+                                </button>
                             </div>
                         </div>
-                    )}
-                </div>
-            </div>
-            <div className="cv-overview">
-                {overview && <p>{JSON.stringify(inputValueObj)}</p>}
+
+                        {dialogValuesObj.state && (
+                            <div className="dialog-overlay">
+                                <div className="dialog-content">
+                                    <div className="select-input-type">
+                                        <p>Select input type</p>
+                                        <NewInputFieldSelection
+                                            handleAddFieldType={
+                                                handleDialogType
+                                            }
+                                            selectedType={dialogValuesObj.type}
+                                        />
+                                    </div>
+                                    <Input
+                                        cvDataValues={cvDataValues}
+                                        handleOnchange={handleOnChange}
+                                        name="Input Title"
+                                        placeholder="e.g., Nationality, Date of Birth"
+                                        handleBlur={handleBlur}
+                                        isDialog={dialogValuesObj}
+                                    />
+                                    <div className="buttons-container">
+                                        <Button
+                                            buttonTitle="Cancel"
+                                            bgc="var(--red)"
+                                            active="active"
+                                            onClick={handleDialogControl}
+                                        />
+                                        <Button
+                                            buttonTitle="Add Field"
+                                            bgc="var(--moderate-green)"
+                                            active={
+                                                dialogValuesObj.fieldName.trim()
+                                                    ? "active"
+                                                    : "inactive"
+                                            }
+                                            onClick={handleAddField}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                )}
             </div>
         </section>
     );

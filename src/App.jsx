@@ -6,10 +6,20 @@ import cvSectionData from "./utils/cvSectionData";
 import "./App.css";
 import "./index.css";
 function App() {
+    const initialCvSection = JSON.stringify(cvSectionData[0].sectionName);
+    const [cvDataValues, setCvDataValues] = useState({
+        "Personal Infomation": {},
+    });
+    const [activeCvSection, setActiveCvSection] = useState({
+        name: initialCvSection,
+        index: 0,
+    });
+
     const [dialogValuesObj, setDialogValuesObj] = useState({
         state: false,
         cvSectionName: "",
     });
+
     const [dynamicCvSection, setDynamicCvSection] = useState([]);
     const handleCvDialogInputChange = (e) => {
         let cvSectionObj = {
@@ -40,7 +50,6 @@ function App() {
             });
         }
     };
-    console.log(dynamicCvSection);
 
     return (
         <div className="App">
@@ -48,7 +57,7 @@ function App() {
             <main className="main-content">
                 {/* Render Default Cv sections */}
                 <div className="cv-section">
-                    {cvSectionData.map((sectionData) => {
+                    {cvSectionData.map((sectionData, i) => {
                         return (
                             <Cvsection
                                 key={sectionData.id}
@@ -56,11 +65,16 @@ function App() {
                                 defaultFields={sectionData.fields}
                                 heading={sectionData.sectionName}
                                 className={sectionData.class}
+                                cvDataValues={cvDataValues}
+                                setCvDataValues={setCvDataValues}
+                                activeCvSection={activeCvSection}
+                                setActiveCvSection={setActiveCvSection}
+                                index={i}
                             />
                         );
                     })}
                     {/* Render Dynamic Cv sections */}
-                    {dynamicCvSection.map((cvSection) => {
+                    {dynamicCvSection.map((cvSection, i) => {
                         return (
                             <Cvsection
                                 key={cvSection.id}
@@ -68,6 +82,11 @@ function App() {
                                 defaultFields={[]}
                                 heading={cvSection.sectionName}
                                 className={"cv-section"}
+                                cvDataValues={cvDataValues}
+                                setCvDataValues={setCvDataValues}
+                                activeCvSection={activeCvSection}
+                                setActiveCvSection={setActiveCvSection}
+                                index={i + cvSectionData.length}
                             />
                         );
                     })}
@@ -115,7 +134,9 @@ function App() {
                         ➕
                     </button>
                 </div>
-                <div className="cv-overv"></div>
+                <div className="cv-overview">
+                    <p>{JSON.stringify(cvDataValues)}</p>
+                </div>
             </main>
         </div>
     );

@@ -2,7 +2,7 @@ import "./reusableIU.css";
 
 // Input Component
 const Input = ({
-    inputValueObj,
+    cvDataValues,
     handleOnchange,
     name,
     defaultType = "text",
@@ -13,7 +13,7 @@ const Input = ({
 }) => {
     const value = isDialog
         ? isDialog.fieldName
-        : inputValueObj[defaultType]?.[name] || "";
+        : cvDataValues[defaultType]?.[name] || "";
     const error = errorMsgObj?.[defaultType]?.[name];
 
     return (
@@ -39,15 +39,15 @@ const Input = ({
 
 // TextArea Component
 function TextArea({
-    inputValueObj,
+    cvDataValues,
     name,
     defaultType,
     handleOnchange,
     placeholder,
 }) {
     let value = "";
-    if (inputValueObj[defaultType]) {
-        value = inputValueObj[defaultType]?.[name] || "";
+    if (cvDataValues[defaultType]) {
+        value = cvDataValues[defaultType]?.[name] || "";
     }
 
     return (
@@ -81,11 +81,21 @@ const Button = ({ buttonTitle, bgc, active, onClick }) => (
 );
 
 // Arccodion Component
-function Accordion({ sectionName, isOpen, onClick }) {
+function Accordion({
+    sectionName,
+    isOpen,
+    index,
+    isCvSectionActive,
+    onClick,
+    cvDataValues,
+    setCvDataValues,
+}) {
+    if (!cvDataValues[sectionName])
+        setCvDataValues({ ...cvDataValues, [sectionName]: {} });
     return (
-        <div className="pannel" onClick={onClick}>
+        <div className="pannel" data-index={index} onClick={onClick}>
             <h2>{sectionName}</h2>
-            {isOpen ? (
+            {isCvSectionActive && isOpen ? (
                 <i className="bi bi-chevron-down"></i>
             ) : (
                 <i className="bi bi-chevron-right"></i>
