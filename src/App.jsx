@@ -6,7 +6,7 @@ import cvSectionData from "./utils/cvSectionData";
 import "./App.css";
 import "./index.css";
 function App() {
-    const initialCvSection = JSON.stringify(cvSectionData[0].sectionName);
+    const initialCvSection = cvSectionData[0].sectionName;
     const [cvDataValues, setCvDataValues] = useState({
         "Personal Infomation": {},
     });

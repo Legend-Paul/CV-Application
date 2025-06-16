@@ -75,7 +75,6 @@ function Cvsection({
             index: e.target.dataset.index,
         });
     };
-    console.log(activeCvSection, index, isCvSectionActive);
 
     const handleDialogType = (e) => {
         setDialogValuesObj({ ...dialogValuesObj, type: e.target.value });
@@ -99,14 +98,27 @@ function Cvsection({
         } else {
             // Handle regular form field changes
             const { type, name, value } = e.target;
-            setCvDataValues(addFieldToObj(cvDataValues, type, name, value));
+
+            let obj = addFieldToObj(
+                cvDataValues[activeCvSection.name],
+                type,
+                name,
+                value
+            );
+
+            setCvDataValues({
+                ...cvDataValues,
+                [activeCvSection.name]: {
+                    ...cvDataValues[activeCvSection.name],
+                    ...obj,
+                },
+            });
 
             setCanSubmit(true);
         }
     };
-
     const handleReset = () => {
-        setCvDataValues(initialState);
+        setCvDataValues({ ...cvDataValues, [activeCvSection.name]: {} });
         setErrorMsgObj(initialState);
         setCanSubmit(false);
         setDynamicFields([]);
@@ -133,6 +145,7 @@ function Cvsection({
     };
 
     const addFieldToObj = (stateObj, type, name, value) => {
+        console.log(stateObj);
         return {
             ...stateObj,
             [type]: { ...stateObj[type], [name]: value },
@@ -214,7 +227,9 @@ function Cvsection({
                                         return (
                                             <TextArea
                                                 key={field.id}
-                                                cvDataValues={cvDataValues}
+                                                cvDataValues={
+                                                    cvDataValues[heading]
+                                                }
                                                 name={"Description"}
                                                 defaultType="textarea"
                                                 handleOnchange={handleOnChange}
@@ -227,7 +242,7 @@ function Cvsection({
                                     return (
                                         <Input
                                             key={field.id}
-                                            cvDataValues={cvDataValues}
+                                            cvDataValues={cvDataValues[heading]}
                                             handleOnchange={handleOnChange}
                                             name={field.name}
                                             defaultType={field.type}
@@ -243,7 +258,9 @@ function Cvsection({
                                         return (
                                             <TextArea
                                                 key={field.id}
-                                                cvDataValues={cvDataValues}
+                                                cvDataValues={
+                                                    cvDataValues[heading]
+                                                }
                                                 name={"Description"}
                                                 defaultType="textarea"
                                                 handleOnchange={handleOnChange}
@@ -256,7 +273,7 @@ function Cvsection({
                                     return (
                                         <Input
                                             key={field.id}
-                                            cvDataValues={cvDataValues}
+                                            cvDataValues={cvDataValues[heading]}
                                             handleOnchange={handleOnChange}
                                             name={field.name}
                                             defaultType={field.type}
