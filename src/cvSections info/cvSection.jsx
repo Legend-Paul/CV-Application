@@ -65,6 +65,7 @@ function Cvsection({
     const [canSubmit, setCanSubmit] = useState(false);
     const [dynamicFields, setDynamicFields] = useState([]);
     let isCvSectionActive = activeCvSection.index == index;
+    console.log(dynamicFields);
 
     const toggleAccordion = (e) => {
         console.log(e.target.dataset.index);
@@ -145,7 +146,6 @@ function Cvsection({
     };
 
     const addFieldToObj = (stateObj, type, name, value) => {
-        console.log(stateObj);
         return {
             ...stateObj,
             [type]: { ...stateObj[type], [name]: value },
@@ -261,7 +261,7 @@ function Cvsection({
                                                 cvDataValues={
                                                     cvDataValues[heading]
                                                 }
-                                                name={"Description"}
+                                                name={field.name}
                                                 defaultType="textarea"
                                                 handleOnchange={handleOnChange}
                                                 placeholder={field.placeholder}

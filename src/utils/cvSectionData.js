@@ -12,6 +12,12 @@ let cvSectionData = [
                 placeholder: "Maina Paul",
             },
             {
+                id: Date.now() + "3",
+                name: "Title",
+                type: "text",
+                placeholder: "Software Engineer",
+            },
+            {
                 id: Date.now() + "2",
                 name: "Email Adress",
                 type: "email",
@@ -22,12 +28,6 @@ let cvSectionData = [
                 name: "Phone Number",
                 type: "tel",
                 placeholder: "+254712345678",
-            },
-            {
-                id: Date.now() + "8",
-                name: "Postal Adress",
-                type: "text",
-                placeholder: "",
             },
         ],
     },
