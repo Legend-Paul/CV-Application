@@ -54,6 +54,7 @@ function Cvsection({
     index,
     educationSectionFields,
     setEducationSectionFields,
+    setUpdatedCvDataValues,
 }) {
     const initialState = {};
     const [dialogValuesObj, setDialogValuesObj] = useState({
@@ -64,7 +65,7 @@ function Cvsection({
     const [isOpen, setIsOpen] = useState(open);
 
     const [errorMsgObj, setErrorMsgObj] = useState({ ...initialState });
-    const [canSubmit, setCanSubmit] = useState(false);
+    const [canSubmit, setCanSubmit] = useState(true);
     const [dynamicFields, setDynamicFields] = useState([]);
     let isCvSectionActive = activeCvSection.index == index;
 
@@ -158,10 +159,9 @@ function Cvsection({
                     ...obj,
                 },
             });
-
-            setCanSubmit(true);
         }
     };
+
     const handleReset = () => {
         setCvDataValues({ ...cvDataValues, [activeCvSection.name]: {} });
         setErrorMsgObj(initialState);
@@ -211,8 +211,11 @@ function Cvsection({
                         "Invalid Email Address"
                     )
                 );
+                setCanSubmit(false);
             } else {
                 removeEmptyFields(type, value, name);
+
+                setCanSubmit(true);
             }
         }
 
@@ -226,25 +229,46 @@ function Cvsection({
                         "Invalid Phone Number (format: +1234567890)"
                     )
                 );
+                setCanSubmit(false);
             } else {
                 removeEmptyFields(type, value, name);
             }
+            setCanSubmit(true);
         }
+        if (type !== "tel" || type !== "email") setCanSubmit(true);
     };
 
     const removeEmptyFields = (type, value, name) => {
         let fieldObj = { ...errorMsgObj };
         if (fieldObj[type]) {
-            Object.keys(fieldObj[type]).length > 1 || value
-                ? delete fieldObj[type][name]
-                : delete fieldObj[type];
+            if (Object.keys(fieldObj[type]).length > 1) {
+                delete fieldObj[type][name];
+            } else {
+                if (Object.keys(fieldObj[type])[0] === name)
+                    delete fieldObj[type];
+            }
         }
         setErrorMsgObj(fieldObj);
     };
 
+    console.log(cvDataValues);
+
     const handleSubmit = () => {
         if (canSubmit) {
-            alert("submited");
+            setCvDataValues({
+                ...cvDataValues,
+                [activeCvSection.name]: {
+                    ...cvDataValues[activeCvSection.name],
+                    canUpdate: true,
+                },
+            });
+            setUpdatedCvDataValues({
+                ...cvDataValues,
+                [activeCvSection.name]: {
+                    ...cvDataValues[activeCvSection.name],
+                    canUpdate: true,
+                },
+            });
         }
     };
 
@@ -375,7 +399,7 @@ function Cvsection({
                                         title: "Submit",
                                     }}
                                     disabled={
-                                        !Object.keys(errorMsgObj).length < 1
+                                        !Object.keys(errorMsgObj).length > 1
                                     }
                                 >
                                     ✓

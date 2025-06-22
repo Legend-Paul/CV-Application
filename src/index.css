@@ -36,6 +36,7 @@ section {
 
 h3 {
     text-align: center;
+    padding-top: 1.5rem;
 }
 
 i {
@@ -143,8 +144,6 @@ dialog {
 }
 
 .cv-overview {
-    display: grid;
-    gap: 2rem;
     .personal-infomation {
         .cv-heading {
             display: flex;
@@ -155,33 +154,26 @@ dialog {
             width: 100%;
             height: 8rem;
             background-color: var(--light-blue);
-            margin-bottom: 1rem;
         }
         .personal-details {
             display: grid;
             gap: 1rem;
 
-            .details-list {
-                display: grid;
-                gap: 0.75rem;
-                .list {
-                    /* display: flex;
-                    gap: 0.5rem; */
-                    /* align-items: center; */
+            .list {
+                display: flex;
 
-                    /* .maker {
+                /* .maker {
                         background-color: var(--primary-color);
                         width: 0.35rem;
                         height: 0.35rem;
                         border-radius: 50%;
                     } */
 
-                    .detail {
-                        display: flex;
-                        gap: 0.5rem;
-                        .detail-name {
-                            width: 10rem;
-                        }
+                .detail {
+                    display: flex;
+                    gap: 0.5rem;
+                    .detail-name {
+                        width: 10rem;
                     }
                 }
             }
@@ -196,9 +188,9 @@ dialog {
     }
     .education-details {
         display: grid;
-        gap: 1.5rem;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        /* border-bottom: 2px solid var(--medium-grey); */
+        h4 {
+            margin-top: 1rem;
+        }
         .education {
             display: grid;
             gap: 0.5rem;
@@ -215,6 +207,8 @@ dialog {
             .description-content {
                 display: grid;
                 gap: 0.5rem;
+                border-bottom: 1px solid var(--medium-grey);
+                padding-bottom: 1rem;
             }
         }
     }

@@ -91,7 +91,10 @@ function Accordion({
     setCvDataValues,
 }) {
     if (!cvDataValues[sectionName])
-        setCvDataValues({ ...cvDataValues, [sectionName]: {} });
+        setCvDataValues({
+            ...cvDataValues,
+            [sectionName]: { canUpdate: false },
+        });
     return (
         <div className="pannel" data-index={index} onClick={onClick}>
             <h2>{sectionName}</h2>

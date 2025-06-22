@@ -11,12 +11,16 @@ import "./index.css";
 function App() {
     const initialCvSection = cvSectionData[0].sectionName;
     const [cvDataValues, setCvDataValues] = useState({
-        "Personal Infomation": {},
+        "Personal Infomation": { canUpdate: false },
+    });
+    const [updatedCvDataValues, setUpdatedCvDataValues] = useState({
+        ...cvDataValues,
     });
 
     const [activeCvSection, setActiveCvSection] = useState({
         name: initialCvSection,
         index: 0,
+        canUpdate: false,
     });
 
     const [dialogValuesObj, setDialogValuesObj] = useState({
@@ -55,6 +59,7 @@ function App() {
             });
         }
     };
+    // console.log(updatedCvDataValues);
 
     return (
         <div className="App">
@@ -79,6 +84,8 @@ function App() {
                                 setEducationSectionFields={
                                     setEducationSectionFields
                                 }
+                                updatedCvDataValues={updatedCvDataValues}
+                                setUpdatedCvDataValues={setUpdatedCvDataValues}
                             />
                         );
                     })}
@@ -144,14 +151,16 @@ function App() {
                     </button>
                 </div>
                 <div className="cv-overview">
-                    <PersonalDetailsOverview
-                        cvDataValues={cvDataValues}
-                        cvSectionName={initialCvSection}
-                    />
+                    {updatedCvDataValues[initialCvSection].canUpdate && (
+                        <PersonalDetailsOverview
+                            updatedCvDataValues={updatedCvDataValues}
+                            cvSectionName={initialCvSection}
+                        />
+                    )}
 
-                    {cvDataValues["Education Background"] && (
+                    {updatedCvDataValues["Education Background"] && (
                         <EducationDetailSection
-                            cvDataValues={cvDataValues}
+                            updatedCvDataValues={updatedCvDataValues}
                             cvSectionName={"Education Background"}
                             qualification={"Qualification"}
                             educationSectionFields={educationSectionFields}
