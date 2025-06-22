@@ -34,6 +34,10 @@ section {
     }
 }
 
+h3 {
+    text-align: center;
+}
+
 i {
     font-size: 1.5rem;
     cursor: pointer;
@@ -139,6 +143,8 @@ dialog {
 }
 
 .cv-overview {
+    display: grid;
+    gap: 2rem;
     .personal-infomation {
         .cv-heading {
             display: flex;
@@ -154,29 +160,26 @@ dialog {
         .personal-details {
             display: grid;
             gap: 1rem;
-            h3 {
-                text-align: center;
-            }
+
             .details-list {
                 display: grid;
                 gap: 0.75rem;
                 .list {
-                    display: flex;
-                    gap: 1rem;
-                    align-items: center;
-                    border-bottom: 1px solid var(--medium-grey);
-                    .maker {
+                    /* display: flex;
+                    gap: 0.5rem; */
+                    /* align-items: center; */
+
+                    /* .maker {
                         background-color: var(--primary-color);
                         width: 0.35rem;
                         height: 0.35rem;
                         border-radius: 50%;
-                    }
+                    } */
 
                     .detail {
                         display: flex;
                         gap: 0.5rem;
                         .detail-name {
-                            font-weight: 600;
                             width: 10rem;
                         }
                     }
@@ -186,6 +189,30 @@ dialog {
         .textarea-field {
             .textarea-content {
                 margin-top: 1rem;
+                display: grid;
+                gap: 0.5rem;
+            }
+        }
+    }
+    .education-details {
+        display: grid;
+        gap: 1.5rem;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        /* border-bottom: 2px solid var(--medium-grey); */
+        .education {
+            display: grid;
+            gap: 0.5rem;
+
+            .name-content {
+                display: flex;
+                p {
+                    &:first-child {
+                        font-size: 1rem;
+                        width: 10rem;
+                    }
+                }
+            }
+            .description-content {
                 display: grid;
                 gap: 0.5rem;
             }

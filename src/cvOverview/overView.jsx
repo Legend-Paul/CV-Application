@@ -1,6 +1,6 @@
 import "../index.css";
-function PersonalDetailsOverview({ cvDataValues, initialCvSection }) {
-    let personlInfoObj = cvDataValues[initialCvSection];
+function PersonalDetailsOverview({ cvDataValues, cvSectionName }) {
+    const personlInfoObj = cvDataValues[cvSectionName];
     return (
         <div className="personal-infomation">
             <div className="cv-heading">
@@ -13,7 +13,7 @@ function PersonalDetailsOverview({ cvDataValues, initialCvSection }) {
                 </p>
             </div>
             <div className="personal-details">
-                <h3>{initialCvSection}</h3>
+                <h3>{cvSectionName}</h3>
 
                 {Object.entries(personlInfoObj).map((items) => {
                     if (items[0] !== "textarea") {
@@ -77,6 +77,65 @@ function PersonalDetailsOverview({ cvDataValues, initialCvSection }) {
     );
 }
 
-function EducationDetailSection() {}
+function EducationDetailSection({
+    cvDataValues,
+    cvSectionName,
+    qualification,
+    educationSectionFields,
+}) {
+    const educationInfoObj = cvDataValues[cvSectionName];
+    return (
+        <div className="education-details">
+            <h3>{cvSectionName}</h3>
+            {educationSectionFields.map((i) => {
+                let id = self.crypto.randomUUID();
 
-export { PersonalDetailsOverview as default };
+                return (
+                    <div key={id} className="education">
+                        {Object.entries(educationInfoObj).map((entry) => {
+                            const field = entry[0];
+
+                            return Object.entries(entry[1]).map((value) => {
+                                if (value[0] === qualification + i) {
+                                    let id = self.crypto.randomUUID();
+
+                                    return <h4 key={id}>{value[1]}</h4>;
+                                } else if (
+                                    value[0].includes(qualification + i) &&
+                                    value[0] !== qualification + i
+                                ) {
+                                    let id = self.crypto.randomUUID();
+
+                                    return (
+                                        <div className="education" key={id}>
+                                            {field !== "textarea" && (
+                                                <div className="name-content">
+                                                    <p>
+                                                        {value[0].split(" ")[1]}{" "}
+                                                        :
+                                                    </p>
+                                                    <p>{value[1]}</p>
+                                                </div>
+                                            )}
+                                            {field === "textarea" && (
+                                                <div className="name-content description-content">
+                                                    <p>
+                                                        {value[0].split(" ")[1]}{" "}
+                                                        :
+                                                    </p>
+                                                    <p>{value[1]}</p>
+                                                </div>
+                                            )}
+                                        </div>
+                                    );
+                                }
+                            });
+                        })}
+                    </div>
+                );
+            })}
+        </div>
+    );
+}
+
+export { PersonalDetailsOverview as default, EducationDetailSection };

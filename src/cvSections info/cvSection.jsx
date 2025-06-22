@@ -52,6 +52,8 @@ function Cvsection({
     activeCvSection,
     setActiveCvSection,
     index,
+    educationSectionFields,
+    setEducationSectionFields,
 }) {
     const initialState = {};
     const [dialogValuesObj, setDialogValuesObj] = useState({
@@ -91,7 +93,10 @@ function Cvsection({
                 { name: "Description", type: "textarea" },
             ];
             let fields = [...dynamicFields];
-
+            setEducationSectionFields([
+                ...educationSectionFields,
+                educationSectionFields.at(-1) + 1,
+            ]);
             for (let i = 0; i < 5; i++) {
                 let qualificaton = "Qualification" + index;
                 let id = self.crypto.randomUUID();
@@ -269,7 +274,7 @@ function Cvsection({
                                                 cvDataValues={
                                                     cvDataValues[heading]
                                                 }
-                                                name={"Description"}
+                                                name={field.name}
                                                 defaultType="textarea"
                                                 handleOnchange={handleOnChange}
                                                 placeholder={field.placeholder}

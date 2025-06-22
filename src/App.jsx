@@ -3,7 +3,9 @@ import { Input, Button } from "./utils/reusableIU";
 import Cvsection from "./cvSections info/cvSection";
 import Header from "./header/header";
 import cvSectionData from "./utils/cvSectionData";
-import PersonalDetailsOverview from "./cvOverview/overView";
+import PersonalDetailsOverview, {
+    EducationDetailSection,
+} from "./cvOverview/overView";
 import "./App.css";
 import "./index.css";
 function App() {
@@ -11,6 +13,7 @@ function App() {
     const [cvDataValues, setCvDataValues] = useState({
         "Personal Infomation": {},
     });
+
     const [activeCvSection, setActiveCvSection] = useState({
         name: initialCvSection,
         index: 0,
@@ -22,6 +25,7 @@ function App() {
     });
 
     const [dynamicCvSection, setDynamicCvSection] = useState([]);
+    const [educationSectionFields, setEducationSectionFields] = useState([1]);
     const handleCvDialogInputChange = (e) => {
         let cvSectionObj = {
             ...dialogValuesObj,
@@ -71,6 +75,10 @@ function App() {
                                 activeCvSection={activeCvSection}
                                 setActiveCvSection={setActiveCvSection}
                                 index={i}
+                                educationSectionFields={educationSectionFields}
+                                setEducationSectionFields={
+                                    setEducationSectionFields
+                                }
                             />
                         );
                     })}
@@ -138,8 +146,17 @@ function App() {
                 <div className="cv-overview">
                     <PersonalDetailsOverview
                         cvDataValues={cvDataValues}
-                        initialCvSection={initialCvSection}
+                        cvSectionName={initialCvSection}
                     />
+
+                    {cvDataValues["Education Background"] && (
+                        <EducationDetailSection
+                            cvDataValues={cvDataValues}
+                            cvSectionName={"Education Background"}
+                            qualification={"Qualification"}
+                            educationSectionFields={educationSectionFields}
+                        />
+                    )}
                 </div>
             </main>
         </div>

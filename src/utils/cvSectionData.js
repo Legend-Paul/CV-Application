@@ -52,17 +52,15 @@ let cvSectionData = [
                 id: Date.now() + "11",
                 name: "Qualification1 Start",
                 type: "date",
-                placeholder: "Bacherol Of Arts",
             },
             {
                 id: Date.now() + "12",
                 name: "Qualification1 End",
                 type: "date",
-                placeholder: "Bacherol Of Arts",
             },
             {
                 id: Date.now() + "13",
-                name: "Description",
+                name: "Qualification1 Description",
                 type: "textarea",
                 placeholder: "Qualification1 Description",
             },
