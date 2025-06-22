@@ -38,25 +38,25 @@ let cvSectionData = [
         fields: [
             {
                 id: Date.now() + "9",
-                name: "Qualification",
+                name: "Qualification1",
                 type: "text",
                 placeholder: "Bacherol Of Arts",
             },
             {
                 id: Date.now() + "10",
-                name: "Institution",
+                name: "Qualification1 Institution",
                 type: "text",
                 placeholder: "Kenyatta University",
             },
             {
                 id: Date.now() + "11",
-                name: "Start",
+                name: "Qualification1 Start",
                 type: "date",
                 placeholder: "Bacherol Of Arts",
             },
             {
                 id: Date.now() + "12",
-                name: "End",
+                name: "Qualification1 End",
                 type: "date",
                 placeholder: "Bacherol Of Arts",
             },
@@ -64,7 +64,7 @@ let cvSectionData = [
                 id: Date.now() + "13",
                 name: "Description",
                 type: "textarea",
-                placeholder: "Qualification Description",
+                placeholder: "Qualification1 Description",
             },
         ],
     },

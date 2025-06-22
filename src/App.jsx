@@ -50,6 +50,7 @@ function App() {
             });
         }
     };
+
     let personlInfoObj = cvDataValues[initialCvSection];
     return (
         <div className="App">

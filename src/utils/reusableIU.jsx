@@ -53,7 +53,7 @@ function TextArea({
 
     return (
         <>
-            <label>
+            <label className="textarea-label">
                 {name}
                 <textarea
                     type={defaultType}

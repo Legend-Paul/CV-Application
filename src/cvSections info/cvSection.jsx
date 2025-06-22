@@ -65,7 +65,6 @@ function Cvsection({
     const [canSubmit, setCanSubmit] = useState(false);
     const [dynamicFields, setDynamicFields] = useState([]);
     let isCvSectionActive = activeCvSection.index == index;
-    console.log(dynamicFields);
 
     const toggleAccordion = (e) => {
         console.log(e.target.dataset.index);
@@ -82,11 +81,45 @@ function Cvsection({
     };
 
     const handleDialogControl = () => {
-        setDialogValuesObj({
-            state: !dialogValuesObj.state,
-            type: "text",
-            fieldName: "",
-        });
+        if (activeCvSection.name === "Education Background") {
+            let index = 2;
+            if (dynamicFields.length) index = dynamicFields.length / 5 + index;
+            let inputFields = [
+                { name: "Qualification", type: "input" },
+                { name: "Institution", type: "input" },
+                { name: "Start", type: "date" },
+                { name: "End", type: "date" },
+                { name: "Description", type: "textarea" },
+            ];
+            let fields = [...dynamicFields];
+
+            for (let i = 0; i < 5; i++) {
+                let qualificaton = "Qualification" + index;
+
+                if (i === 0) {
+                    let field = {
+                        ...inputFields[i],
+                        name: qualificaton,
+                    };
+                    fields.push(field);
+                    setDynamicFields([...fields]);
+                } else {
+                    let field = {
+                        ...inputFields[i],
+                        name: qualificaton + " " + inputFields[i].name,
+                    };
+                    fields.push(field);
+
+                    setDynamicFields([...fields]);
+                }
+            }
+        } else {
+            setDialogValuesObj({
+                state: !dialogValuesObj.state,
+                type: "text",
+                fieldName: "",
+            });
+        }
     };
 
     const handleOnChange = (e) => {
@@ -339,47 +372,50 @@ function Cvsection({
                             </div>
                         </div>
 
-                        {dialogValuesObj.state && (
-                            <div className="dialog-overlay">
-                                <div className="dialog-content">
-                                    <div className="select-input-type">
-                                        <p>Select input type</p>
-                                        <NewInputFieldSelection
-                                            handleAddFieldType={
-                                                handleDialogType
-                                            }
-                                            selectedType={dialogValuesObj.type}
+                        {dialogValuesObj.state &&
+                            activeCvSection.name !== "Education Background" && (
+                                <div className="dialog-overlay">
+                                    <div className="dialog-content">
+                                        <div className="select-input-type">
+                                            <p>Select input type</p>
+                                            <NewInputFieldSelection
+                                                handleAddFieldType={
+                                                    handleDialogType
+                                                }
+                                                selectedType={
+                                                    dialogValuesObj.type
+                                                }
+                                            />
+                                        </div>
+                                        <Input
+                                            cvDataValues={cvDataValues}
+                                            handleOnchange={handleOnChange}
+                                            name="Input Title"
+                                            placeholder="e.g., Nationality, Date of Birth"
+                                            handleBlur={handleBlur}
+                                            isDialog={dialogValuesObj}
                                         />
-                                    </div>
-                                    <Input
-                                        cvDataValues={cvDataValues}
-                                        handleOnchange={handleOnChange}
-                                        name="Input Title"
-                                        placeholder="e.g., Nationality, Date of Birth"
-                                        handleBlur={handleBlur}
-                                        isDialog={dialogValuesObj}
-                                    />
-                                    <div className="buttons-container">
-                                        <Button
-                                            buttonTitle="Cancel"
-                                            bgc="var(--red)"
-                                            active="active"
-                                            onClick={handleDialogControl}
-                                        />
-                                        <Button
-                                            buttonTitle="Add Field"
-                                            bgc="var(--moderate-green)"
-                                            active={
-                                                dialogValuesObj.fieldName.trim()
-                                                    ? "active"
-                                                    : "inactive"
-                                            }
-                                            onClick={handleAddField}
-                                        />
+                                        <div className="buttons-container">
+                                            <Button
+                                                buttonTitle="Cancel"
+                                                bgc="var(--red)"
+                                                active="active"
+                                                onClick={handleDialogControl}
+                                            />
+                                            <Button
+                                                buttonTitle="Add Field"
+                                                bgc="var(--moderate-green)"
+                                                active={
+                                                    dialogValuesObj.fieldName.trim()
+                                                        ? "active"
+                                                        : "inactive"
+                                                }
+                                                onClick={handleAddField}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        )}
+                            )}
                     </div>
                 )}
             </div>

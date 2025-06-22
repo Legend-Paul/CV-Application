@@ -131,6 +131,13 @@ dialog {
     position: relative;
 }
 
+.education-info {
+    .textarea-label {
+        padding-bottom: 2rem;
+        border-bottom: 2px solid var(--medium-grey);
+    }
+}
+
 .cv-overview {
     .personal-infomation {
         .cv-heading {
@@ -164,6 +171,7 @@ dialog {
                         height: 0.35rem;
                         border-radius: 50%;
                     }
+
                     .detail {
                         display: flex;
                         gap: 0.5rem;
