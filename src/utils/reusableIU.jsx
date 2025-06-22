@@ -11,7 +11,6 @@ const Input = ({
     errorMsgObj,
     isDialog,
 }) => {
-    // console.log(cvDataValues);
     const value = isDialog
         ? isDialog.fieldName
         : cvDataValues[defaultType]?.[name] || "";

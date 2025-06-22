@@ -1,2 +1,82 @@
-import { sectionInfo } from "../cvSections info/cvSection";
-console.log(sectionInfo);
+import "../index.css";
+function PersonalDetailsOverview({ cvDataValues, initialCvSection }) {
+    let personlInfoObj = cvDataValues[initialCvSection];
+    return (
+        <div className="personal-infomation">
+            <div className="cv-heading">
+                <h2>
+                    {personlInfoObj["text"] &&
+                        personlInfoObj["text"]["Full Name"]}
+                </h2>
+                <p>
+                    {personlInfoObj["text"] && personlInfoObj["text"]["Title"]}
+                </p>
+            </div>
+            <div className="personal-details">
+                <h3>{initialCvSection}</h3>
+
+                {Object.entries(personlInfoObj).map((items) => {
+                    if (items[0] !== "textarea") {
+                        return (
+                            <div className="details-list">
+                                {Object.entries(items[1]).map((item) => {
+                                    const id = self.crypto.randomUUID();
+                                    const key = item[0];
+                                    const value = item[1];
+
+                                    // Only render if the key is not "Full Name" or "Title"
+                                    if (
+                                        value &&
+                                        key !== "Full Name" &&
+                                        key !== "Title"
+                                    ) {
+                                        return (
+                                            <div className="list" key={id}>
+                                                <div className="maker"></div>
+                                                <div className="detail">
+                                                    {" "}
+                                                    <p className="detail-name">
+                                                        {key} :
+                                                    </p>
+                                                    <p>{value}</p>
+                                                </div>
+                                            </div>
+                                        );
+                                    }
+
+                                    // Skip rendering for "Full Name" and "Title"
+                                })}
+                            </div>
+                        );
+                    }
+                })}
+            </div>
+            <div className="textarea-field">
+                {Object.entries(personlInfoObj).map((items) => {
+                    if (items[0] === "textarea") {
+                        return (
+                            <div className="text-area-cont">
+                                {Object.entries(items[1]).map((item) => {
+                                    let key = item[0];
+                                    let value = item[1];
+                                    if (value) {
+                                        return (
+                                            <div className="textarea-content">
+                                                <h4>{key}</h4>
+                                                <p>{value}</p>
+                                            </div>
+                                        );
+                                    }
+                                })}
+                            </div>
+                        );
+                    }
+                })}
+            </div>
+        </div>
+    );
+}
+
+function EducationDetailSection() {}
+
+export { PersonalDetailsOverview as default };

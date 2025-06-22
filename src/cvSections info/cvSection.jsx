@@ -67,7 +67,6 @@ function Cvsection({
     let isCvSectionActive = activeCvSection.index == index;
 
     const toggleAccordion = (e) => {
-        console.log(e.target.dataset.index);
         isOpen ? setIsOpen(true) : setIsOpen(!isOpen);
         setActiveCvSection({
             ...activeCvSection,
@@ -85,8 +84,8 @@ function Cvsection({
             let index = 2;
             if (dynamicFields.length) index = dynamicFields.length / 5 + index;
             let inputFields = [
-                { name: "Qualification", type: "input" },
-                { name: "Institution", type: "input" },
+                { name: "Qualification" },
+                { name: "Institution" },
                 { name: "Start", type: "date" },
                 { name: "End", type: "date" },
                 { name: "Description", type: "textarea" },
@@ -95,18 +94,25 @@ function Cvsection({
 
             for (let i = 0; i < 5; i++) {
                 let qualificaton = "Qualification" + index;
-
+                let id = self.crypto.randomUUID();
                 if (i === 0) {
                     let field = {
                         ...inputFields[i],
+                        id: id,
                         name: qualificaton,
+                        placeholder: "Bachelor Of Arts",
                     };
                     fields.push(field);
                     setDynamicFields([...fields]);
                 } else {
                     let field = {
                         ...inputFields[i],
+                        id: id,
                         name: qualificaton + " " + inputFields[i].name,
+                        placeholder:
+                            inputFields[i].type === "textarea"
+                                ? qualificaton + " " + inputFields[i].name
+                                : "Kenyatta University",
                     };
                     fields.push(field);
 
