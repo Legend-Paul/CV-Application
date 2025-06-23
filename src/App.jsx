@@ -3,9 +3,8 @@ import { Input, Button } from "./utils/reusableIU";
 import Cvsection from "./cvSections info/cvSection";
 import Header from "./header/header";
 import cvSectionData from "./utils/cvSectionData";
-import PersonalDetailsOverview, {
-    EducationDetailSection,
-} from "./cvOverview/overView";
+import PersonalDetailsOverview from "./cvOverview/personalInfo";
+import EducationDetailSection from "./cvOverview/educationInfo";
 import "./App.css";
 import "./index.css";
 function App() {

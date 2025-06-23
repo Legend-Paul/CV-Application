@@ -80,6 +80,7 @@ dialog {
     margin-top: 2rem;
     display: flex;
     justify-content: space-between;
+
     button {
         padding: 0.35rem 0.75rem;
         border: none;
