@@ -2,8 +2,6 @@ import { useState } from "react";
 import { Input, Button, Accordion, TextArea } from "../utils/reusableIU";
 import "./cvSection.css";
 
-// Mock components for demonstration
-
 function NewInputFieldSelection({ handleAddFieldType, selectedType }) {
     return (
         <select
@@ -11,12 +9,27 @@ function NewInputFieldSelection({ handleAddFieldType, selectedType }) {
             value={selectedType}
             style={{ padding: "8px", width: "100%", borderRadius: "4px" }}
         >
-            <option value="text">Text Field</option>
-            <option value="email">Email Field</option>
-            <option value="date">Date Field</option>
-            <option value="number">Number Field</option>
-            <option value="tel">Tel Field</option>
-            <option value="textarea">Textarea Field</option>
+            <option data-link="" value="text">
+                Text Field
+            </option>
+            <option data-link="isLink" value="text">
+                Link Field
+            </option>
+            <option data-link="" value="email">
+                Email Field
+            </option>
+            <option data-link="" value="date">
+                Date Field
+            </option>
+            <option data-link="" value="number">
+                Number Field
+            </option>
+            <option data-link="" value="tel">
+                Tel Field
+            </option>
+            <option data-link="" value="textarea">
+                Textarea Field
+            </option>
         </select>
     );
 }
@@ -38,7 +51,6 @@ function Cvsection({
     setUrlLink,
     addsSimalarFields,
 }) {
-    console.log(knowldedgeSectionFields);
     const initialState = {};
     const [dialogValuesObj, setDialogValuesObj] = useState({
         state: false,
@@ -62,7 +74,15 @@ function Cvsection({
     };
 
     const handleDialogType = (e) => {
-        setDialogValuesObj({ ...dialogValuesObj, type: e.target.value });
+        // Get the selected <option> element
+        const selectedOption = e.target.options[e.target.selectedIndex];
+        const link = selectedOption.dataset.link;
+
+        setDialogValuesObj({
+            ...dialogValuesObj,
+            type: e.target.value,
+            link: link,
+        });
     };
 
     const handleDialogControl = () => {
@@ -132,7 +152,6 @@ function Cvsection({
                     },
                 });
             }
-
             let obj = addFieldToObj(
                 cvDataValues[activeCvSection.name],
                 type,
@@ -149,6 +168,7 @@ function Cvsection({
             });
         }
     };
+
     const handleReset = () => {
         setCvDataValues({ ...cvDataValues, [activeCvSection.name]: {} });
         setErrorMsgObj(initialState);
@@ -163,6 +183,7 @@ function Cvsection({
                 name: dialogValuesObj.fieldName.trim(),
                 type: dialogValuesObj.type,
                 placeholder: `Enter ${dialogValuesObj.fieldName.toLowerCase()}`,
+                isLink: dialogValuesObj.link || "",
             };
 
             setDynamicFields([...dynamicFields, newField]);
@@ -187,6 +208,7 @@ function Cvsection({
         const { type, name, value } = e.target;
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i;
         const telRegex = /^\+\d{1,3}\d{9}$/;
+        const urlRegex = /(https?:\/\/[^\s]+)|(www\.[^\s]+)/gi;
 
         if (type === "email") {
             if (value && !emailRegex.test(value)) {
@@ -222,7 +244,35 @@ function Cvsection({
             }
             setCanSubmit(true);
         }
-        if (type !== "tel" || type !== "email") setCanSubmit(true);
+        if (e.target.dataset.link) {
+            if (value && !urlRegex.test(value)) {
+                setErrorMsgObj(
+                    addFieldToObj(
+                        errorMsgObj,
+                        type,
+                        name,
+                        "Invalid URL (format: http:// or https://)"
+                    )
+                );
+                setCanSubmit(false);
+            } else {
+                setUrlLink({
+                    ...urlLink,
+                    [activeCvSection.name]: {
+                        ...urlLink[activeCvSection.name],
+                        [name]: value,
+                    },
+                });
+
+                setCanSubmit(true);
+
+                removeEmptyFields(type, value, name);
+            }
+        } else if (
+            type !== "tel" ||
+            (type !== "email" && !e.target.dataset.link)
+        )
+            setCanSubmit(true);
     };
 
     const removeEmptyFields = (type, value, name) => {
@@ -305,6 +355,7 @@ function Cvsection({
                                             placeholder={field.placeholder}
                                             handleBlur={handleBlur}
                                             errorMsgObj={errorMsgObj}
+                                            isLink={field.isLink}
                                         />
                                     );
                                 })}
@@ -336,6 +387,7 @@ function Cvsection({
                                             placeholder={field.placeholder}
                                             handleBlur={handleBlur}
                                             errorMsgObj={errorMsgObj}
+                                            isLink={field.isLink}
                                         />
                                     );
                                 })}

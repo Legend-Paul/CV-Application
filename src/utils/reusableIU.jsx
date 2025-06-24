@@ -11,6 +11,7 @@ const Input = ({
     handleBlur,
     errorMsgObj,
     isDialog,
+    isLink = "",
 }) => {
     const value =
         defaultType === "file"
@@ -30,6 +31,7 @@ const Input = ({
             <label>
                 {name}
                 <input
+                    data-link={isLink}
                     type={defaultType}
                     name={name}
                     value={value}
