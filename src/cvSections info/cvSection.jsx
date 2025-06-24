@@ -4,27 +4,6 @@ import "./cvSection.css";
 
 // Mock components for demonstration
 
-// function Cvsection({ open, defaultFields, heading, className }) {
-//     const [isOpen, setIsOpen] = useState(open);
-//     const toggleAccordion = () => setIsOpen(!isOpen);
-
-//     return (
-//         <section className={className}>
-//             <Accordion
-//                 sectionName={heading}
-//                 isOpen={isOpen}
-//                 onClick={toggleAccordion}
-//             />
-//             {isOpen && (
-//                 <CvsectionFields
-//                     defaultFields={defaultFields}
-//                     heading={heading}
-//                 />
-//             )}
-//         </section>
-//     );
-// }
-
 function NewInputFieldSelection({ handleAddFieldType, selectedType }) {
     return (
         <select
@@ -89,7 +68,8 @@ function Cvsection({
     const handleDialogControl = () => {
         if (addsSimalarFields) {
             let index = 2;
-            if (dynamicFields.length) index = dynamicFields.length / 5 + index;
+            if (dynamicFields.length)
+                index = dynamicFields.length / defaultFields.length + index;
 
             let fields = [...dynamicFields];
             setKnowldedgeSectionFields({
@@ -109,7 +89,7 @@ function Cvsection({
                     })
                     .join(" ");
                 let placeholder = field.placeholder
-                    ? field.placeholder + " " + index
+                    ? field.placeholder
                     : "Enter " + name.toLowerCase();
                 fields.push({
                     ...field,

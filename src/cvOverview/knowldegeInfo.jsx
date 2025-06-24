@@ -4,7 +4,6 @@ export default function OverviewknowldegeInfo({
     qualification,
     knowldedgeSectionFields,
 }) {
-    console.log(knowldedgeSectionFields);
     const knowledgeInfoObj = updatedCvDataValues[cvSectionName];
     if (
         updatedCvDataValues[cvSectionName].canUpdate &&
@@ -27,26 +26,25 @@ export default function OverviewknowldegeInfo({
                                     ) {
                                         let id = self.crypto.randomUUID();
 
-                                        if (
-                                            qualification.includes(
-                                                "Qualification"
-                                            ) ||
-                                            qualification.includes("Experience")
-                                        ) {
-                                            return <h4 key={id}>{value[1]}</h4>;
-                                        } else {
-                                            return (
-                                                <p key={id}>
-                                                    {i + ". " + value[1]}
-                                                </p>
-                                            );
-                                        }
+                                        return (
+                                            <h4 key={id}>
+                                                {i + ". " + value[1]}
+                                            </h4>
+                                        );
                                     } else if (
                                         value[0].includes(qualification + i) &&
                                         value[0] !== qualification + i &&
                                         value[1]
                                     ) {
                                         let id = self.crypto.randomUUID();
+                                        let description = "";
+                                        if (
+                                            qualification === "Qualification" ||
+                                            qualification === "Experience"
+                                        ) {
+                                            description =
+                                                value[0].split(" ")[1] + ":";
+                                        }
 
                                         return (
                                             <div className="knowledge" key={id}>
@@ -58,21 +56,16 @@ export default function OverviewknowldegeInfo({
                                                                     " "
                                                                 )[1]
                                                             }{" "}
-                                                            :
                                                         </p>
                                                         <p>{value[1]}</p>
                                                     </div>
                                                 )}
                                                 {field === "textarea" && (
-                                                    <div className="name-content description-content">
-                                                        <p>
-                                                            {
-                                                                value[0].split(
-                                                                    " "
-                                                                )[1]
-                                                            }{" "}
-                                                            :
-                                                        </p>
+                                                    <div
+                                                        className="description"
+                                                        id={qualification.toLowerCase()}
+                                                    >
+                                                        <p>{description}</p>
                                                         <p>{value[1]}</p>
                                                     </div>
                                                 )}

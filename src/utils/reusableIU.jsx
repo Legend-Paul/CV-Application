@@ -104,7 +104,6 @@ function Accordion({
     knowldedgeSectionFields,
     addsSimalarFields,
 }) {
-    console.log(knowldedgeSectionFields);
     useEffect(() => {
         if (!cvDataValues[sectionName]) {
             setCvDataValues((prevValues) => ({

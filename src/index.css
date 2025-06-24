@@ -203,29 +203,33 @@ dialog {
             }
         }
     }
-    .education-details {
+    .knowledge-details-container {
         display: grid;
-        h4 {
-            margin-top: 1rem;
-        }
-        .education {
+        gap: 1rem;
+        .knowledge-details {
             display: grid;
             gap: 0.5rem;
 
-            .name-content {
-                display: flex;
-                p {
-                    &:first-child {
-                        font-size: 1rem;
-                        width: 10rem;
+            padding-bottom: 0.5rem;
+            .knowledge {
+                padding-left: 1rem;
+                .name-content {
+                    display: flex;
+                    p {
+                        &:first-child {
+                            width: 6rem;
+                        }
                     }
                 }
-            }
-            .description-content {
-                display: grid;
-                gap: 0.5rem;
-                border-bottom: 1px solid var(--medium-grey);
-                padding-bottom: 1rem;
+                .description {
+                    display: flex;
+                    gap: 0.5rem;
+                    p {
+                        &:first-child {
+                            width: 6rem;
+                        }
+                    }
+                }
             }
         }
     }
