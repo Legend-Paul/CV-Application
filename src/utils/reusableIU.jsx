@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import "./reusableIU.css";
 
 // Input Component
@@ -11,10 +12,18 @@ const Input = ({
     errorMsgObj,
     isDialog,
 }) => {
-    const value = isDialog
-        ? isDialog.fieldName
-        : cvDataValues[defaultType]?.[name] || "";
+    const value =
+        defaultType === "file"
+            ? undefined // Do not set value for file inputs
+            : isDialog
+            ? isDialog.fieldName
+            : cvDataValues[defaultType]?.[name] || "";
     const error = errorMsgObj?.[defaultType]?.[name];
+
+    const fileName =
+        defaultType === "file" && cvDataValues[defaultType]?.[name]
+            ? cvDataValues[defaultType][name].split("\\").pop() // Extract file name
+            : "No file chosen";
 
     return (
         <div className="input-group">
@@ -31,12 +40,14 @@ const Input = ({
                         border: error ? "2px solid #dc3545" : "1px solid #ccc",
                     }}
                 />
+                {defaultType === "file" && (
+                    <span className="file-name">{fileName}</span>
+                )}
                 {error && <span>{error}</span>}
             </label>
         </div>
     );
 };
-
 // TextArea Component
 function TextArea({
     cvDataValues,
@@ -90,11 +101,15 @@ function Accordion({
     cvDataValues,
     setCvDataValues,
 }) {
-    if (!cvDataValues[sectionName])
-        setCvDataValues({
-            ...cvDataValues,
-            [sectionName]: { canUpdate: false },
-        });
+    useEffect(() => {
+        if (!cvDataValues[sectionName]) {
+            setCvDataValues((prevValues) => ({
+                ...prevValues,
+                [sectionName]: { canUpdate: false },
+            }));
+        }
+    }, [cvDataValues, sectionName, setCvDataValues]);
+
     return (
         <div className="pannel" data-index={index} onClick={onClick}>
             <h2>{sectionName}</h2>

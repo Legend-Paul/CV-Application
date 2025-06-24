@@ -2,18 +2,33 @@ import "../index.css";
 export default function PersonalDetailsOverview({
     updatedCvDataValues,
     cvSectionName,
+    urlLink,
 }) {
     const personlInfoObj = updatedCvDataValues[cvSectionName];
     return (
         <div className="personal-infomation">
             <div className="cv-heading">
-                <h2>
-                    {personlInfoObj["text"] &&
-                        personlInfoObj["text"]["Full Name"]}
-                </h2>
-                <p>
-                    {personlInfoObj["text"] && personlInfoObj["text"]["Title"]}
-                </p>
+                <div className="image">
+                    {urlLink["Image"] && (
+                        <img
+                            src={urlLink["Image"]}
+                            alt={
+                                personlInfoObj["text"] &&
+                                personlInfoObj["text"]["Title"] + " image"
+                            }
+                        />
+                    )}
+                </div>
+                <div className="name-title">
+                    <h2>
+                        {personlInfoObj["text"] &&
+                            personlInfoObj["text"]["Full Name"]}
+                    </h2>
+                    <p>
+                        {personlInfoObj["text"] &&
+                            personlInfoObj["text"]["Title"]}
+                    </p>
+                </div>
             </div>
             <div className="personal-details">
                 <h3>{cvSectionName}</h3>
@@ -29,7 +44,8 @@ export default function PersonalDetailsOverview({
                             if (
                                 value &&
                                 key !== "Full Name" &&
-                                key !== "Title"
+                                key !== "Title" &&
+                                key !== "Image"
                             ) {
                                 return (
                                     <div className="list" key={id}>

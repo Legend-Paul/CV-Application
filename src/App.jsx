@@ -28,7 +28,11 @@ function App() {
     });
 
     const [dynamicCvSection, setDynamicCvSection] = useState([]);
+
     const [educationSectionFields, setEducationSectionFields] = useState([1]);
+
+    const [urlLink, setUrlLink] = useState({ "Personal Infomation": {} });
+
     const handleCvDialogInputChange = (e) => {
         let cvSectionObj = {
             ...dialogValuesObj,
@@ -85,6 +89,8 @@ function App() {
                                 }
                                 updatedCvDataValues={updatedCvDataValues}
                                 setUpdatedCvDataValues={setUpdatedCvDataValues}
+                                urlLink={urlLink}
+                                setUrlLink={setUrlLink}
                             />
                         );
                     })}
@@ -102,6 +108,10 @@ function App() {
                                 activeCvSection={activeCvSection}
                                 setActiveCvSection={setActiveCvSection}
                                 index={i + cvSectionData.length}
+                                updatedCvDataValues={updatedCvDataValues}
+                                setUpdatedCvDataValues={setUpdatedCvDataValues}
+                                urlLink={urlLink}
+                                setUrlLink={setUrlLink}
                             />
                         );
                     })}
@@ -154,6 +164,7 @@ function App() {
                         <PersonalDetailsOverview
                             updatedCvDataValues={updatedCvDataValues}
                             cvSectionName={initialCvSection}
+                            urlLink={urlLink[initialCvSection] || {}}
                         />
                     )}
 
@@ -163,6 +174,7 @@ function App() {
                             cvSectionName={"Education Background"}
                             qualification={"Qualification"}
                             educationSectionFields={educationSectionFields}
+                            urlLink={urlLink["Education Background"] || {}}
                         />
                     )}
                 </div>

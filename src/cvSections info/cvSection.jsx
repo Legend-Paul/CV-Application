@@ -55,6 +55,8 @@ function Cvsection({
     educationSectionFields,
     setEducationSectionFields,
     setUpdatedCvDataValues,
+    urlLink,
+    setUrlLink,
 }) {
     const initialState = {};
     const [dialogValuesObj, setDialogValuesObj] = useState({
@@ -143,7 +145,20 @@ function Cvsection({
             });
         } else {
             // Handle regular form field changes
-            const { type, name, value } = e.target;
+            let { type, name, value, files } = e.target;
+            let url = null;
+
+            if (type === "file" && files) {
+                url = URL.createObjectURL(files[0]);
+
+                setUrlLink({
+                    ...urlLink,
+                    [activeCvSection.name]: {
+                        ...urlLink[activeCvSection.name],
+                        [name]: url,
+                    },
+                });
+            }
 
             let obj = addFieldToObj(
                 cvDataValues[activeCvSection.name],
@@ -161,7 +176,7 @@ function Cvsection({
             });
         }
     };
-
+    console.log(urlLink);
     const handleReset = () => {
         setCvDataValues({ ...cvDataValues, [activeCvSection.name]: {} });
         setErrorMsgObj(initialState);
@@ -250,8 +265,6 @@ function Cvsection({
         }
         setErrorMsgObj(fieldObj);
     };
-
-    console.log(cvDataValues);
 
     const handleSubmit = () => {
         if (canSubmit) {
