@@ -55,7 +55,13 @@ export default function PersonalDetailsOverview({
                                             <p className="detail-name">
                                                 {key} :
                                             </p>
-                                            <p>{value}</p>
+                                            {urlLink[key] ? (
+                                                <a href={key} target="_blank">
+                                                    <p>{key}</p>
+                                                </a>
+                                            ) : (
+                                                <p>{value}</p>
+                                            )}
                                         </div>
                                     </div>
                                 );
