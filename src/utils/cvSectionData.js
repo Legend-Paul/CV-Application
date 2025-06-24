@@ -132,6 +132,26 @@ let cvSectionData = [
             },
         ],
     },
+    {
+        sectionName: "Hobbies",
+        id: self.crypto.randomUUID(),
+        class: "hobbies cv-section",
+        addsSimalarFields: true,
+        fields: [
+            {
+                id: self.crypto.randomUUID(),
+                name: "Hobby1",
+                type: "text",
+                placeholder: "Reading",
+            },
+            {
+                id: self.crypto.randomUUID(),
+                name: "Hobby1 Description",
+                type: "textarea",
+                placeholder: "Reading Description",
+            },
+        ],
+    },
 ];
 
 export default cvSectionData;

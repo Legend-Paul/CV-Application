@@ -174,34 +174,26 @@ function App() {
                             urlLink={urlLink[initialCvSection] || {}}
                         />
                     )}
-
-                    {updatedCvDataValues["Education Background"] && (
-                        <OverviewknowldegeInfo
-                            updatedCvDataValues={updatedCvDataValues}
-                            cvSectionName={"Education Background"}
-                            qualification={"Qualification"}
-                            knowldedgeSectionFields={knowldedgeSectionFields}
-                            urlLink={urlLink["Education Background"] || {}}
-                        />
-                    )}
-                    {updatedCvDataValues["Work Experience"] && (
-                        <OverviewknowldegeInfo
-                            updatedCvDataValues={updatedCvDataValues}
-                            cvSectionName={"Work Experience"}
-                            qualification={"Experience"}
-                            knowldedgeSectionFields={knowldedgeSectionFields}
-                            urlLink={urlLink["Work Experience"] || {}}
-                        />
-                    )}
-                    {updatedCvDataValues["Skills"] && (
-                        <OverviewknowldegeInfo
-                            updatedCvDataValues={updatedCvDataValues}
-                            cvSectionName={"Skills"}
-                            qualification={"Skill"}
-                            knowldedgeSectionFields={knowldedgeSectionFields}
-                            urlLink={urlLink["Skills"] || {}}
-                        />
-                    )}
+                    {cvSectionData.slice(1).map((sectionData) => {
+                        let name = sectionData.sectionName;
+                        return (
+                            updatedCvDataValues[name] && (
+                                <OverviewknowldegeInfo
+                                    key={sectionData.id}
+                                    updatedCvDataValues={updatedCvDataValues}
+                                    cvSectionName={name}
+                                    qualification={
+                                        sectionData.qualification ||
+                                        sectionData.sectionName
+                                    }
+                                    knowldedgeSectionFields={
+                                        knowldedgeSectionFields
+                                    }
+                                    urlLink={urlLink[name] || {}}
+                                />
+                            )
+                        );
+                    })}
                 </div>
             </main>
         </div>

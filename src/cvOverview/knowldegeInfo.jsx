@@ -56,6 +56,7 @@ export default function OverviewknowldegeInfo({
                                                                     " "
                                                                 )[1]
                                                             }{" "}
+                                                            :{" "}
                                                         </p>
                                                         <p>{value[1]}</p>
                                                     </div>
