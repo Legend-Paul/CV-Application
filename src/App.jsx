@@ -64,7 +64,6 @@ function App() {
             });
         }
     };
-    // console.log(updatedCvDataValues);
 
     return (
         <div className="App">
@@ -182,14 +181,11 @@ function App() {
                                     key={sectionData.id}
                                     updatedCvDataValues={updatedCvDataValues}
                                     cvSectionName={name}
-                                    qualification={
-                                        sectionData.qualification ||
-                                        sectionData.sectionName
-                                    }
+                                    qualification={sectionData.mainName}
                                     knowldedgeSectionFields={
                                         knowldedgeSectionFields
                                     }
-                                    urlLink={urlLink[name] || {}}
+                                    urlLink={urlLink}
                                 />
                             )
                         );

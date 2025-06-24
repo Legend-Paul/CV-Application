@@ -55,6 +55,8 @@ let cvSectionData = [
         id: self.crypto.randomUUID(),
         class: "education-info cv-section",
         addsSimalarFields: true,
+        mainName: "Qualification",
+
         fields: [
             {
                 id: self.crypto.randomUUID(),
@@ -94,6 +96,7 @@ let cvSectionData = [
         id: self.crypto.randomUUID(),
         class: "work-experience cv-section",
         addsSimalarFields: true,
+        mainName: "Experience",
         fields: [
             {
                 id: self.crypto.randomUUID(),
@@ -134,6 +137,7 @@ let cvSectionData = [
         id: self.crypto.randomUUID(),
         class: "skills cv-section",
         addsSimalarFields: true,
+        mainName: "Skill",
         fields: [
             {
                 id: self.crypto.randomUUID(),
@@ -156,6 +160,7 @@ let cvSectionData = [
         id: self.crypto.randomUUID(),
         class: "hobbies cv-section",
         addsSimalarFields: true,
+        mainName: "Hobby",
         fields: [
             {
                 id: self.crypto.randomUUID(),
@@ -169,6 +174,43 @@ let cvSectionData = [
                 name: "Hobby1 Description",
                 type: "textarea",
                 placeholder: "Reading Description",
+                isLink: "",
+            },
+        ],
+    },
+    {
+        sectionName: "Projects",
+        id: self.crypto.randomUUID(),
+        class: "projects cv-section",
+        addsSimalarFields: true,
+        mainName: "Project",
+        fields: [
+            {
+                id: self.crypto.randomUUID(),
+                name: "Project1",
+                type: "text",
+                placeholder: "Weather App",
+                isLink: "",
+            },
+            {
+                id: self.crypto.randomUUID(),
+                name: "Project1 Code Link",
+                type: "text",
+                placeholder: "https://github.com/username/weather-app",
+                isLink: "isLink",
+            },
+            {
+                id: self.crypto.randomUUID(),
+                name: "Project1 Preview Link",
+                type: "text",
+                placeholder: "https://weather-app-demo.com",
+                isLink: "isLink",
+            },
+            {
+                id: self.crypto.randomUUID(),
+                name: "Project1 Description",
+                type: "textarea",
+                placeholder: "Project1 Description",
                 isLink: "",
             },
         ],

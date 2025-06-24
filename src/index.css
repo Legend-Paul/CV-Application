@@ -43,7 +43,11 @@ i {
     font-size: 1.5rem;
     cursor: pointer;
 }
-
+a {
+    p {
+        color: var(--blue);
+    }
+}
 dialog {
     position: absolute;
     top: 50%;

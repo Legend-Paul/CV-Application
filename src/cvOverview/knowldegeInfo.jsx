@@ -3,6 +3,7 @@ export default function OverviewknowldegeInfo({
     cvSectionName,
     qualification,
     knowldedgeSectionFields,
+    urlLink,
 }) {
     const knowledgeInfoObj = updatedCvDataValues[cvSectionName];
     if (
@@ -46,19 +47,31 @@ export default function OverviewknowldegeInfo({
                                                 value[0].split(" ")[1] + ":";
                                         }
 
+                                        let values = value[0].split(" ")[1];
+
+                                        console.log(value);
+
                                         return (
                                             <div className="knowledge" key={id}>
                                                 {field !== "textarea" && (
                                                     <div className="name-content">
-                                                        <p>
-                                                            {
-                                                                value[0].split(
-                                                                    " "
-                                                                )[1]
-                                                            }{" "}
-                                                            :{" "}
-                                                        </p>
-                                                        <p>{value[1]}</p>
+                                                        <p>{values} : </p>
+                                                        {urlLink[
+                                                            cvSectionName
+                                                        ] ? (
+                                                            <a
+                                                                href={
+                                                                    urlLink[
+                                                                        cvSectionName
+                                                                    ]
+                                                                }
+                                                                target="_blank"
+                                                            >
+                                                                <p>{values}</p>
+                                                            </a>
+                                                        ) : (
+                                                            <p>{value[1]}</p>
+                                                        )}
                                                     </div>
                                                 )}
                                                 {field === "textarea" && (
