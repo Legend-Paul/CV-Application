@@ -1,22 +1,25 @@
-export default function EducationDetailSection({
+export default function OverviewknowldegeInfo({
     updatedCvDataValues,
     cvSectionName,
     qualification,
-    educationSectionFields,
+    knowldedgeSectionFields,
 }) {
-    const educationInfoObj = updatedCvDataValues[cvSectionName];
-    if (updatedCvDataValues["Education Background"].canUpdate)
+    console.log(knowldedgeSectionFields);
+    const knowledgeInfoObj = updatedCvDataValues[cvSectionName];
+    if (
+        updatedCvDataValues[cvSectionName].canUpdate &&
+        knowldedgeSectionFields[cvSectionName]
+    )
         return (
-            <div className="education-details">
+            <div className="knowledge-details-container">
                 <h3>{cvSectionName}</h3>
-                {educationSectionFields.map((i) => {
+                {knowldedgeSectionFields[cvSectionName].map((i) => {
                     let id = self.crypto.randomUUID();
 
                     return (
-                        <div key={id} className="education">
-                            {Object.entries(educationInfoObj).map((entry) => {
+                        <div key={id} className="knowledge-details">
+                            {Object.entries(knowledgeInfoObj).map((entry) => {
                                 const field = entry[0];
-
                                 return Object.entries(entry[1]).map((value) => {
                                     if (
                                         value[0] === qualification + i &&
@@ -24,7 +27,20 @@ export default function EducationDetailSection({
                                     ) {
                                         let id = self.crypto.randomUUID();
 
-                                        return <h4 key={id}>{value[1]}</h4>;
+                                        if (
+                                            qualification.includes(
+                                                "Qualification"
+                                            ) ||
+                                            qualification.includes("Experience")
+                                        ) {
+                                            return <h4 key={id}>{value[1]}</h4>;
+                                        } else {
+                                            return (
+                                                <p key={id}>
+                                                    {i + ". " + value[1]}
+                                                </p>
+                                            );
+                                        }
                                     } else if (
                                         value[0].includes(qualification + i) &&
                                         value[0] !== qualification + i &&
@@ -33,7 +49,7 @@ export default function EducationDetailSection({
                                         let id = self.crypto.randomUUID();
 
                                         return (
-                                            <div className="education" key={id}>
+                                            <div className="knowledge" key={id}>
                                                 {field !== "textarea" && (
                                                     <div className="name-content">
                                                         <p>

@@ -100,7 +100,11 @@ function Accordion({
     onClick,
     cvDataValues,
     setCvDataValues,
+    setKnowldedgeSectionFields,
+    knowldedgeSectionFields,
+    addsSimalarFields,
 }) {
+    console.log(knowldedgeSectionFields);
     useEffect(() => {
         if (!cvDataValues[sectionName]) {
             setCvDataValues((prevValues) => ({
@@ -109,6 +113,18 @@ function Accordion({
             }));
         }
     }, [cvDataValues, sectionName, setCvDataValues]);
+    useEffect(() => {
+        if (!knowldedgeSectionFields[sectionName] && addsSimalarFields)
+            setKnowldedgeSectionFields({
+                ...knowldedgeSectionFields,
+                [sectionName]: [1],
+            });
+    }, [
+        knowldedgeSectionFields,
+        sectionName,
+        setKnowldedgeSectionFields,
+        addsSimalarFields,
+    ]);
 
     return (
         <div className="pannel" data-index={index} onClick={onClick}>

@@ -4,7 +4,7 @@ import Cvsection from "./cvSections info/cvSection";
 import Header from "./header/header";
 import cvSectionData from "./utils/cvSectionData";
 import PersonalDetailsOverview from "./cvOverview/personalInfo";
-import EducationDetailSection from "./cvOverview/educationInfo";
+import OverviewknowldegeInfo from "./cvOverview/knowldegeInfo";
 import "./App.css";
 import "./index.css";
 function App() {
@@ -29,7 +29,9 @@ function App() {
 
     const [dynamicCvSection, setDynamicCvSection] = useState([]);
 
-    const [educationSectionFields, setEducationSectionFields] = useState([1]);
+    const [knowldedgeSectionFields, setKnowldedgeSectionFields] = useState({
+        [cvSectionData[1].sectionName]: [1],
+    });
 
     const [urlLink, setUrlLink] = useState({ "Personal Infomation": {} });
 
@@ -83,14 +85,19 @@ function App() {
                                 activeCvSection={activeCvSection}
                                 setActiveCvSection={setActiveCvSection}
                                 index={i}
-                                educationSectionFields={educationSectionFields}
-                                setEducationSectionFields={
-                                    setEducationSectionFields
+                                knowldedgeSectionFields={
+                                    knowldedgeSectionFields
+                                }
+                                setKnowldedgeSectionFields={
+                                    setKnowldedgeSectionFields
                                 }
                                 updatedCvDataValues={updatedCvDataValues}
                                 setUpdatedCvDataValues={setUpdatedCvDataValues}
                                 urlLink={urlLink}
                                 setUrlLink={setUrlLink}
+                                addsSimalarFields={
+                                    sectionData.addsSimalarFields
+                                }
                             />
                         );
                     })}
@@ -169,12 +176,30 @@ function App() {
                     )}
 
                     {updatedCvDataValues["Education Background"] && (
-                        <EducationDetailSection
+                        <OverviewknowldegeInfo
                             updatedCvDataValues={updatedCvDataValues}
                             cvSectionName={"Education Background"}
                             qualification={"Qualification"}
-                            educationSectionFields={educationSectionFields}
+                            knowldedgeSectionFields={knowldedgeSectionFields}
                             urlLink={urlLink["Education Background"] || {}}
+                        />
+                    )}
+                    {updatedCvDataValues["Work Experience"] && (
+                        <OverviewknowldegeInfo
+                            updatedCvDataValues={updatedCvDataValues}
+                            cvSectionName={"Work Experience"}
+                            qualification={"Experience"}
+                            knowldedgeSectionFields={knowldedgeSectionFields}
+                            urlLink={urlLink["Work Experience"] || {}}
+                        />
+                    )}
+                    {updatedCvDataValues["Skills"] && (
+                        <OverviewknowldegeInfo
+                            updatedCvDataValues={updatedCvDataValues}
+                            cvSectionName={"Skills"}
+                            qualification={"Skill"}
+                            knowldedgeSectionFields={knowldedgeSectionFields}
+                            urlLink={urlLink["Skills"] || {}}
                         />
                     )}
                 </div>

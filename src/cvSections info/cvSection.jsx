@@ -52,12 +52,14 @@ function Cvsection({
     activeCvSection,
     setActiveCvSection,
     index,
-    educationSectionFields,
-    setEducationSectionFields,
+    knowldedgeSectionFields,
+    setKnowldedgeSectionFields,
     setUpdatedCvDataValues,
     urlLink,
     setUrlLink,
+    addsSimalarFields,
 }) {
+    console.log(knowldedgeSectionFields);
     const initialState = {};
     const [dialogValuesObj, setDialogValuesObj] = useState({
         state: false,
@@ -85,48 +87,39 @@ function Cvsection({
     };
 
     const handleDialogControl = () => {
-        if (activeCvSection.name === "Education Background") {
+        if (addsSimalarFields) {
             let index = 2;
             if (dynamicFields.length) index = dynamicFields.length / 5 + index;
-            let inputFields = [
-                { name: "Qualification" },
-                { name: "Institution" },
-                { name: "Start", type: "date" },
-                { name: "End", type: "date" },
-                { name: "Description", type: "textarea" },
-            ];
-            let fields = [...dynamicFields];
-            setEducationSectionFields([
-                ...educationSectionFields,
-                educationSectionFields.at(-1) + 1,
-            ]);
-            for (let i = 0; i < 5; i++) {
-                let qualificaton = "Qualification" + index;
-                let id = self.crypto.randomUUID();
-                if (i === 0) {
-                    let field = {
-                        ...inputFields[i],
-                        id: id,
-                        name: qualificaton,
-                        placeholder: "Bachelor Of Arts",
-                    };
-                    fields.push(field);
-                    setDynamicFields([...fields]);
-                } else {
-                    let field = {
-                        ...inputFields[i],
-                        id: id,
-                        name: qualificaton + " " + inputFields[i].name,
-                        placeholder:
-                            inputFields[i].type === "textarea"
-                                ? qualificaton + " " + inputFields[i].name
-                                : "Kenyatta University",
-                    };
-                    fields.push(field);
 
-                    setDynamicFields([...fields]);
-                }
-            }
+            let fields = [...dynamicFields];
+            setKnowldedgeSectionFields({
+                ...knowldedgeSectionFields,
+                [activeCvSection.name]: [
+                    ...knowldedgeSectionFields[activeCvSection.name],
+                    knowldedgeSectionFields[activeCvSection.name].at(-1) + 1,
+                ],
+            });
+
+            defaultFields.map((field) => {
+                let id = self.crypto.randomUUID();
+                let name = field.name
+                    .split(" ")
+                    .map((word, i) => {
+                        return i === 0 ? word.slice(0, -1) + index : word;
+                    })
+                    .join(" ");
+                let placeholder = field.placeholder
+                    ? field.placeholder + " " + index
+                    : "Enter " + name.toLowerCase();
+                fields.push({
+                    ...field,
+                    id: id,
+                    name: name,
+                    placeholder: placeholder,
+                });
+                return field;
+            });
+            setDynamicFields([...fields]);
         } else {
             setDialogValuesObj({
                 state: !dialogValuesObj.state,
@@ -176,7 +169,6 @@ function Cvsection({
             });
         }
     };
-    console.log(urlLink);
     const handleReset = () => {
         setCvDataValues({ ...cvDataValues, [activeCvSection.name]: {} });
         setErrorMsgObj(initialState);
@@ -296,6 +288,9 @@ function Cvsection({
                     onClick={toggleAccordion}
                     cvDataValues={cvDataValues}
                     setCvDataValues={setCvDataValues}
+                    setKnowldedgeSectionFields={setKnowldedgeSectionFields}
+                    knowldedgeSectionFields={knowldedgeSectionFields}
+                    addsSimalarFields={addsSimalarFields}
                 />
                 {isCvSectionActive && isOpen && (
                     <div className="info-fields">
