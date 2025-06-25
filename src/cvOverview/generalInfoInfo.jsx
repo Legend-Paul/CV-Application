@@ -1,4 +1,4 @@
-export default function OverviewknowldegeInfo({
+export default function GeneralInfo({
     updatedCvDataValues,
     cvSectionName,
     qualification,

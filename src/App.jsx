@@ -4,7 +4,8 @@ import Cvsection from "./cvSections info/cvSection";
 import Header from "./header/header";
 import cvSectionData from "./utils/cvSectionData";
 import PersonalDetailsOverview from "./cvOverview/personalInfo";
-import OverviewknowldegeInfo from "./cvOverview/knowldegeInfo";
+import GeneralInfo from "./cvOverview/generalInfoInfo";
+import AddationCVFields from "./cvOverview/AdditionalCvFields";
 import "./App.css";
 import "./index.css";
 function App() {
@@ -50,18 +51,28 @@ function App() {
     };
     const handledCvSection = () => {
         if (dialogValuesObj.cvSectionName.trim()) {
-            const newCvSection = {
-                id: Date.now(),
-                sectionName: dialogValuesObj.cvSectionName.trim(),
-            };
-
-            setDynamicCvSection([...dynamicCvSection, newCvSection]);
-
-            // Close dialog and reset values
-            setDialogValuesObj({
-                state: false,
-                cvSectionName: "",
+            let name = dialogValuesObj.cvSectionName.trim();
+            let isNamePresent = cvSectionData.some((sectionData) => {
+                console.log(sectionData.sectionName, name);
+                return (
+                    sectionData.sectionName.toLocaleLowerCase() ===
+                    name.toLocaleLowerCase()
+                );
             });
+
+            if (!isNamePresent) {
+                const newCvSection = {
+                    id: Date.now(),
+                    sectionName: name,
+                };
+
+                setDynamicCvSection([...dynamicCvSection, newCvSection]);
+                // Close dialog and reset values
+                setDialogValuesObj({
+                    state: false,
+                    cvSectionName: "",
+                });
+            }
         }
     };
 
@@ -114,6 +125,12 @@ function App() {
                                 activeCvSection={activeCvSection}
                                 setActiveCvSection={setActiveCvSection}
                                 index={i + cvSectionData.length}
+                                knowldedgeSectionFields={
+                                    knowldedgeSectionFields
+                                }
+                                setKnowldedgeSectionFields={
+                                    setKnowldedgeSectionFields
+                                }
                                 updatedCvDataValues={updatedCvDataValues}
                                 setUpdatedCvDataValues={setUpdatedCvDataValues}
                                 urlLink={urlLink}
@@ -170,14 +187,14 @@ function App() {
                         <PersonalDetailsOverview
                             updatedCvDataValues={updatedCvDataValues}
                             cvSectionName={initialCvSection}
-                            urlLink={urlLink[initialCvSection] || {}}
+                            urlLink={urlLink}
                         />
                     )}
                     {cvSectionData.slice(1).map((sectionData) => {
                         let name = sectionData.sectionName;
                         return (
                             updatedCvDataValues[name] && (
-                                <OverviewknowldegeInfo
+                                <GeneralInfo
                                     key={sectionData.id}
                                     updatedCvDataValues={updatedCvDataValues}
                                     cvSectionName={name}
@@ -189,6 +206,13 @@ function App() {
                                 />
                             )
                         );
+                    })}
+                    {dynamicCvSection.map((cvSection) => {
+                        <AddationCVFields
+                            cvSectionName={cvSection.cvSectionName}
+                            personlInfoObj={cvSection}
+                            urlLink={urlLink}
+                        />;
                     })}
                 </div>
             </main>
