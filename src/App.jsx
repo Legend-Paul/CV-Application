@@ -22,11 +22,13 @@ function App() {
         index: 0,
         canUpdate: false,
     });
+    const [errorMsgObj, setErrorMsgObj] = useState({});
 
     const [dialogValuesObj, setDialogValuesObj] = useState({
         state: false,
         cvSectionName: "",
     });
+    const [canSubmit, setCanSubmit] = useState(true);
 
     const [dynamicCvSection, setDynamicCvSection] = useState([]);
 
@@ -35,6 +37,12 @@ function App() {
     });
 
     const [urlLink, setUrlLink] = useState({ "Personal Infomation": {} });
+
+    const [inputFieldsDisplay, setInputFieldsDisplay] = useState({
+        buttonType: "preview",
+        isVisible: true,
+        display: "inline-block",
+    });
 
     const handleCvDialogInputChange = (e) => {
         let cvSectionObj = {
@@ -75,114 +83,164 @@ function App() {
             }
         }
     };
+    const handleSubmit = (e) => {
+        console.log("Event Target:", e.target); // Debugging
+        console.log("Dataset Title:", e.target.dataset.title); // Debugging
+
+        if (canSubmit) {
+            setCvDataValues({
+                ...cvDataValues,
+                [activeCvSection.name]: {
+                    ...cvDataValues[activeCvSection.name],
+                    canUpdate: true,
+                },
+            });
+            setUpdatedCvDataValues({
+                ...cvDataValues,
+                [activeCvSection.name]: {
+                    ...cvDataValues[activeCvSection.name],
+                    canUpdate: true,
+                },
+            });
+
+            if (e.target.dataset.title === inputFieldsDisplay.buttonType) {
+                setInputFieldsDisplay({
+                    ...inputFieldsDisplay,
+                    display: "inline-block",
+                    isVisible: !inputFieldsDisplay.isVisible,
+                });
+            }
+        }
+    };
 
     return (
         <div className="App">
             <Header />
             <main className="main-content">
                 {/* Render Default Cv sections */}
-                <div className="cv-section">
-                    {cvSectionData.map((sectionData, i) => {
-                        return (
-                            <Cvsection
-                                key={sectionData.id}
-                                open={sectionData.isOpen}
-                                defaultFields={sectionData.fields}
-                                heading={sectionData.sectionName}
-                                className={sectionData.class}
-                                cvDataValues={cvDataValues}
-                                setCvDataValues={setCvDataValues}
-                                activeCvSection={activeCvSection}
-                                setActiveCvSection={setActiveCvSection}
-                                index={i}
-                                knowldedgeSectionFields={
-                                    knowldedgeSectionFields
-                                }
-                                setKnowldedgeSectionFields={
-                                    setKnowldedgeSectionFields
-                                }
-                                updatedCvDataValues={updatedCvDataValues}
-                                setUpdatedCvDataValues={setUpdatedCvDataValues}
-                                urlLink={urlLink}
-                                setUrlLink={setUrlLink}
-                                addsSimalarFields={
-                                    sectionData.addsSimalarFields
-                                }
-                            />
-                        );
-                    })}
-                    {/* Render Dynamic Cv sections */}
-                    {dynamicCvSection.map((cvSection, i) => {
-                        return (
-                            <Cvsection
-                                key={cvSection.id}
-                                open={false}
-                                defaultFields={[]}
-                                heading={cvSection.sectionName}
-                                className={"cv-section"}
-                                cvDataValues={cvDataValues}
-                                setCvDataValues={setCvDataValues}
-                                activeCvSection={activeCvSection}
-                                setActiveCvSection={setActiveCvSection}
-                                index={i + cvSectionData.length}
-                                knowldedgeSectionFields={
-                                    knowldedgeSectionFields
-                                }
-                                setKnowldedgeSectionFields={
-                                    setKnowldedgeSectionFields
-                                }
-                                updatedCvDataValues={updatedCvDataValues}
-                                setUpdatedCvDataValues={setUpdatedCvDataValues}
-                                urlLink={urlLink}
-                                setUrlLink={setUrlLink}
-                            />
-                        );
-                    })}
-                    {dialogValuesObj.state && (
-                        <div className="dialog-overlay">
-                            <div className="dialog-content">
-                                <Input
-                                    // inputValueObj={inputValueObj}
-                                    handleOnchange={handleCvDialogInputChange}
-                                    name="Input Title"
-                                    placeholder="e.g., Hobbies, Projects"
-                                    isDialog={dialogValuesObj}
+                {inputFieldsDisplay.isVisible && (
+                    <div className="cv-section">
+                        {cvSectionData.map((sectionData, i) => {
+                            return (
+                                <Cvsection
+                                    key={sectionData.id}
+                                    open={sectionData.isOpen}
+                                    defaultFields={sectionData.fields}
+                                    heading={sectionData.sectionName}
+                                    className={sectionData.class}
+                                    cvDataValues={cvDataValues}
+                                    setCvDataValues={setCvDataValues}
+                                    activeCvSection={activeCvSection}
+                                    setActiveCvSection={setActiveCvSection}
+                                    index={i}
+                                    knowldedgeSectionFields={
+                                        knowldedgeSectionFields
+                                    }
+                                    setKnowldedgeSectionFields={
+                                        setKnowldedgeSectionFields
+                                    }
+                                    updatedCvDataValues={updatedCvDataValues}
+                                    setUpdatedCvDataValues={
+                                        setUpdatedCvDataValues
+                                    }
+                                    urlLink={urlLink}
+                                    setUrlLink={setUrlLink}
+                                    addsSimalarFields={
+                                        sectionData.addsSimalarFields
+                                    }
+                                    canSubmit={canSubmit}
+                                    setCanSubmit={setCanSubmit}
+                                    handleSubmit={handleSubmit}
+                                    errorMsgObj={errorMsgObj}
+                                    setErrorMsgObj={setErrorMsgObj}
                                 />
-                                <div className="buttons-container">
-                                    <Button
-                                        buttonTitle="Cancel"
-                                        bgc="var(--red)"
-                                        active="active"
-                                        onClick={handleDialogControl}
-                                    />
-                                    <Button
-                                        buttonTitle="Add Field"
-                                        bgc="var(--moderate-green)"
-                                        active={
-                                            dialogValuesObj.cvSectionName.trim()
-                                                ? "active"
-                                                : "inactive"
+                            );
+                        })}
+                        {/* Render Dynamic Cv sections */}
+                        {dynamicCvSection.map((cvSection, i) => {
+                            return (
+                                <Cvsection
+                                    key={cvSection.id}
+                                    open={false}
+                                    defaultFields={[]}
+                                    heading={cvSection.sectionName}
+                                    className={"cv-section"}
+                                    cvDataValues={cvDataValues}
+                                    setCvDataValues={setCvDataValues}
+                                    activeCvSection={activeCvSection}
+                                    setActiveCvSection={setActiveCvSection}
+                                    index={i + cvSectionData.length}
+                                    knowldedgeSectionFields={
+                                        knowldedgeSectionFields
+                                    }
+                                    setKnowldedgeSectionFields={
+                                        setKnowldedgeSectionFields
+                                    }
+                                    updatedCvDataValues={updatedCvDataValues}
+                                    setUpdatedCvDataValues={
+                                        setUpdatedCvDataValues
+                                    }
+                                    urlLink={urlLink}
+                                    setUrlLink={setUrlLink}
+                                    canSubmit={canSubmit}
+                                    setCanSubmit={setCanSubmit}
+                                    handleSubmit={handleSubmit}
+                                    errorMsgObj={errorMsgObj}
+                                    setErrorMsgObj={setErrorMsgObj}
+                                />
+                            );
+                        })}
+                        {dialogValuesObj.state && (
+                            <div className="dialog-overlay">
+                                <div className="dialog-content">
+                                    <Input
+                                        // inputValueObj={inputValueObj}
+                                        handleOnchange={
+                                            handleCvDialogInputChange
                                         }
-                                        onClick={handledCvSection}
+                                        name="Input Title"
+                                        placeholder="e.g., Hobbies, Projects"
+                                        isDialog={dialogValuesObj}
                                     />
+                                    <div className="buttons-container">
+                                        <Button
+                                            buttonTitle="Cancel"
+                                            bgc="var(--red)"
+                                            active="active"
+                                            onClick={handleDialogControl}
+                                        />
+                                        <Button
+                                            buttonTitle="Add Field"
+                                            bgc="var(--moderate-green)"
+                                            active={
+                                                dialogValuesObj.cvSectionName.trim()
+                                                    ? "active"
+                                                    : "inactive"
+                                            }
+                                            onClick={handledCvSection}
+                                        />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    )}
-                    <button
-                        className="btns"
-                        type="button"
-                        onClick={handleDialogControl}
-                        style={{
-                            color: "var(--moderate-green)",
-                            borderColor: "var(--moderate-green)",
-                            title: "Add Field",
-                        }}
-                    >
-                        ➕
-                    </button>
-                </div>
-                <div className="cv-overview">
+                        )}
+                        <button
+                            className="btns"
+                            type="button"
+                            onClick={handleDialogControl}
+                            style={{
+                                color: "var(--moderate-green)",
+                                borderColor: "var(--moderate-green)",
+                                title: "Add Field",
+                            }}
+                        >
+                            ➕
+                        </button>
+                    </div>
+                )}{" "}
+                <div
+                    className="cv-overview"
+                    style={{ display: inputFieldsDisplay.display }}
+                >
                     {updatedCvDataValues[initialCvSection].canUpdate && (
                         <PersonalDetailsOverview
                             updatedCvDataValues={updatedCvDataValues}
@@ -216,8 +274,70 @@ function App() {
                     })}
                 </div>
             </main>
-            <div className="preview">
-                <i class="bi bi-file-text"></i>
+            <div className="preview-btn-cont">
+                <button
+                    className="btns check-fields"
+                    type="button"
+                    onClick={handleSubmit}
+                    style={{
+                        color:
+                            Object.keys(errorMsgObj).length < 1 && canSubmit
+                                ? "var(--blue)"
+                                : "var(--light-blue)",
+                        borderColor:
+                            Object.keys(errorMsgObj).length < 1 && canSubmit
+                                ? "var(--blue)"
+                                : "var(--light-blue)",
+                        cursor:
+                            Object.keys(errorMsgObj).length < 1 && canSubmit
+                                ? "pointer"
+                                : "not-allowed",
+                        title: "Submit",
+                    }}
+                    disabled={!Object.keys(errorMsgObj).length > 1}
+                >
+                    ✓
+                </button>
+
+                {inputFieldsDisplay.isVisible ? (
+                    <button
+                        className="btns open-preview"
+                        type="button"
+                        onClick={handleSubmit}
+                        style={{
+                            border: "none",
+
+                            cursor:
+                                Object.keys(errorMsgObj).length < 1 && canSubmit
+                                    ? "pointer"
+                                    : "not-allowed",
+                        }}
+                        disabled={!Object.keys(errorMsgObj).length > 1}
+                    >
+                        <i
+                            className="bi bi-eye"
+                            data-title="preview"
+                            style={{
+                                color:
+                                    Object.keys(errorMsgObj).length < 1 &&
+                                    canSubmit
+                                        ? "var(--blue)"
+                                        : "var(--light-blue)",
+                            }}
+                        ></i>
+                    </button>
+                ) : (
+                    <i
+                        className="bi bi-eye-slash close-preview"
+                        onClick={() => {
+                            setInputFieldsDisplay({
+                                ...inputFieldsDisplay,
+                                isVisible: !inputFieldsDisplay.isVisible,
+                                display: "none",
+                            });
+                        }}
+                    ></i>
+                )}
             </div>
         </div>
     );

@@ -46,10 +46,14 @@ function Cvsection({
     index,
     knowldedgeSectionFields,
     setKnowldedgeSectionFields,
-    setUpdatedCvDataValues,
     urlLink,
     setUrlLink,
     addsSimalarFields,
+    canSubmit,
+    setCanSubmit,
+    handleSubmit,
+    errorMsgObj,
+    setErrorMsgObj,
 }) {
     const initialState = {};
     const [dialogValuesObj, setDialogValuesObj] = useState({
@@ -59,8 +63,6 @@ function Cvsection({
     });
     const [isOpen, setIsOpen] = useState(open);
 
-    const [errorMsgObj, setErrorMsgObj] = useState({ ...initialState });
-    const [canSubmit, setCanSubmit] = useState(true);
     const [dynamicFields, setDynamicFields] = useState([]);
     let isCvSectionActive = activeCvSection.index == index;
 
@@ -286,25 +288,6 @@ function Cvsection({
             }
         }
         setErrorMsgObj(fieldObj);
-    };
-
-    const handleSubmit = () => {
-        if (canSubmit) {
-            setCvDataValues({
-                ...cvDataValues,
-                [activeCvSection.name]: {
-                    ...cvDataValues[activeCvSection.name],
-                    canUpdate: true,
-                },
-            });
-            setUpdatedCvDataValues({
-                ...cvDataValues,
-                [activeCvSection.name]: {
-                    ...cvDataValues[activeCvSection.name],
-                    canUpdate: true,
-                },
-            });
-        }
     };
 
     return (

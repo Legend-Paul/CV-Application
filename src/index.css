@@ -22,6 +22,7 @@
     overflow: hidden;
 }
 main {
+    position: relative;
     margin-top: 5rem !important;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -250,18 +251,52 @@ dialog {
     color: #555;
 }
 
-.preview {
+.preview-btn-cont {
     position: fixed;
     bottom: 2rem;
-    right: 2rem;
+    right: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+
+    padding: 0.25rem;
+    border-radius: 0.5rem;
+    button {
+        width: 2rem;
+        height: 2rem;
+    }
     i {
-        font-size: 2rem;
-        color: var(--blue);
+        display: none;
+        font-size: 2.5rem;
+
         cursor: pointer;
-        transition: color 0.3s ease;
+    }
+    .close-preview {
+        color: var(--blue);
     }
 }
 
-.preview i:hover {
-    color: var(--moderate-green);
+/* media queries */
+@media (max-width: 780px) {
+    .preview-btn-cont {
+        right: 0.5rem;
+        .check-fields {
+            display: none;
+        }
+        i {
+            display: inline-block;
+        }
+    }
+    main {
+        display: block;
+    }
+    .cv-overview {
+        display: none;
+    }
+    .section-fields-cont {
+        padding-right: 2.5rem !important;
+        border-right: none !important;
+    }
 }
