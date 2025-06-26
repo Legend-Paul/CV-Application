@@ -41,13 +41,6 @@ let cvSectionData = [
                 placeholder: "+254712345678",
                 isLink: "",
             },
-            {
-                id: self.crypto.randomUUID(),
-                name: "Portfolio Link",
-                type: "text",
-                placeholder: "+254712345678",
-                isLink: "isLink",
-            },
         ],
     },
     {

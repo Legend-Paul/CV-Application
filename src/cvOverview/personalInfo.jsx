@@ -5,13 +5,18 @@ export default function PersonalDetailsOverview({
     urlLink,
 }) {
     const personlInfoObj = updatedCvDataValues[cvSectionName];
+    let personalInfoLinks = urlLink[cvSectionName]
+        ? urlLink[cvSectionName]
+        : {};
+    console.log(personalInfoLinks);
+
     return (
         <div className="personal-infomation">
             <div className="cv-heading">
                 <div className="image">
-                    {urlLink["Image"] && (
+                    {personalInfoLinks["Image"] && (
                         <img
-                            src={urlLink["Image"]}
+                            src={personalInfoLinks["Image"]}
                             alt={
                                 personlInfoObj["text"] &&
                                 personlInfoObj["text"]["Title"] + " image"
