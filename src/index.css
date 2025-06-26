@@ -18,7 +18,11 @@
     font-style: normal;
     color: var(--black);
 }
+.App {
+    overflow: hidden;
+}
 main {
+    margin-top: 5rem !important;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
@@ -149,12 +153,16 @@ dialog {
 }
 
 .cv-overview {
+    padding-top: 1rem;
     .personal-infomation {
         .cv-heading {
             padding: 1rem;
             background-color: var(--light-blue);
             display: flex;
             gap: 1rem;
+            h2 {
+                align-text: center;
+            }
 
             .image {
                 width: 75px;
