@@ -160,9 +160,6 @@ dialog {
             background-color: var(--light-blue);
             display: flex;
             gap: 1rem;
-            h2 {
-                align-text: center;
-            }
 
             .image {
                 width: 75px;
@@ -251,4 +248,20 @@ dialog {
     margin-left: 1em;
     font-size: 0.9em;
     color: #555;
+}
+
+.preview {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    i {
+        font-size: 2rem;
+        color: var(--blue);
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+}
+
+.preview i:hover {
+    color: var(--moderate-green);
 }

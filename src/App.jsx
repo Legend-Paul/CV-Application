@@ -216,6 +216,9 @@ function App() {
                     })}
                 </div>
             </main>
+            <div className="preview">
+                <i class="bi bi-file-text"></i>
+            </div>
         </div>
     );
 }
