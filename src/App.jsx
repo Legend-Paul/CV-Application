@@ -61,7 +61,6 @@ function App() {
         if (dialogValuesObj.cvSectionName.trim()) {
             let name = dialogValuesObj.cvSectionName.trim();
             let isNamePresent = cvSectionData.some((sectionData) => {
-                console.log(sectionData.sectionName, name);
                 return (
                     sectionData.sectionName.toLocaleLowerCase() ===
                     name.toLocaleLowerCase()
@@ -84,9 +83,6 @@ function App() {
         }
     };
     const handleSubmit = (e) => {
-        console.log("Event Target:", e.target); // Debugging
-        console.log("Dataset Title:", e.target.dataset.title); // Debugging
-
         if (canSubmit) {
             setCvDataValues({
                 ...cvDataValues,
@@ -108,6 +104,7 @@ function App() {
                     ...inputFieldsDisplay,
                     display: "inline-block",
                     isVisible: !inputFieldsDisplay.isVisible,
+                    checkFiedBtnDisplay: "none",
                 });
             }
         }
@@ -280,6 +277,7 @@ function App() {
                     type="button"
                     onClick={handleSubmit}
                     style={{
+                        display: inputFieldsDisplay.checkFiedBtnDisplay,
                         color:
                             Object.keys(errorMsgObj).length < 1 && canSubmit
                                 ? "var(--blue)"
@@ -300,32 +298,12 @@ function App() {
                 </button>
 
                 {inputFieldsDisplay.isVisible ? (
-                    <button
-                        className="btns open-preview"
-                        type="button"
+                    <i
+                        className="bi bi-eye"
+                        data-title="preview"
                         onClick={handleSubmit}
-                        style={{
-                            border: "none",
-
-                            cursor:
-                                Object.keys(errorMsgObj).length < 1 && canSubmit
-                                    ? "pointer"
-                                    : "not-allowed",
-                        }}
-                        disabled={!Object.keys(errorMsgObj).length > 1}
-                    >
-                        <i
-                            className="bi bi-eye"
-                            data-title="preview"
-                            style={{
-                                color:
-                                    Object.keys(errorMsgObj).length < 1 &&
-                                    canSubmit
-                                        ? "var(--blue)"
-                                        : "var(--light-blue)",
-                            }}
-                        ></i>
-                    </button>
+                        style={{}}
+                    ></i>
                 ) : (
                     <i
                         className="bi bi-eye-slash close-preview"
@@ -334,6 +312,7 @@ function App() {
                                 ...inputFieldsDisplay,
                                 isVisible: !inputFieldsDisplay.isVisible,
                                 display: "none",
+                                checkFiedBtnDisplay: "inline-block",
                             });
                         }}
                     ></i>

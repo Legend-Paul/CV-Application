@@ -6,9 +6,11 @@ export default function GeneralInfo({
     urlLink,
 }) {
     const knowledgeInfoObj = updatedCvDataValues[cvSectionName];
+
     if (
         updatedCvDataValues[cvSectionName].canUpdate &&
-        knowldedgeSectionFields[cvSectionName]
+        knowldedgeSectionFields[cvSectionName] &&
+        Object.keys(updatedCvDataValues[cvSectionName]).length > 1
     )
         return (
             <div className="knowledge-details-container">

@@ -224,7 +224,7 @@ function Cvsection({
                 );
                 setCanSubmit(false);
             } else {
-                removeEmptyFields(type, value, name);
+                removeEmptyFields(type, name, true);
 
                 setCanSubmit(true);
             }
@@ -242,7 +242,7 @@ function Cvsection({
                 );
                 setCanSubmit(false);
             } else {
-                removeEmptyFields(type, value, name);
+                removeEmptyFields(type, name, true);
             }
             setCanSubmit(true);
         }
@@ -268,17 +268,29 @@ function Cvsection({
 
                 setCanSubmit(true);
 
-                removeEmptyFields(type, value, name);
+                removeEmptyFields(type, name, true);
             }
         } else if (
             type !== "tel" ||
             (type !== "email" && !e.target.dataset.link)
         )
             setCanSubmit(true);
+        if (!value) removeEmptyFields(type, name, false);
     };
 
-    const removeEmptyFields = (type, value, name) => {
-        let fieldObj = { ...errorMsgObj };
+    const removeEmptyFields = (type, name, isError) => {
+        let fieldObj = {};
+        isError
+            ? (fieldObj = { ...errorMsgObj })
+            : (fieldObj = { ...cvDataValues });
+        isError
+            ? chechEmptyField(fieldObj, type, name)
+            : chechEmptyField(fieldObj[activeCvSection.name], type, name);
+
+        isError ? setErrorMsgObj(fieldObj) : setCvDataValues(fieldObj);
+    };
+
+    const chechEmptyField = (fieldObj, type, name) => {
         if (fieldObj[type]) {
             if (Object.keys(fieldObj[type]).length > 1) {
                 delete fieldObj[type][name];
@@ -287,7 +299,6 @@ function Cvsection({
                     delete fieldObj[type];
             }
         }
-        setErrorMsgObj(fieldObj);
     };
 
     return (
