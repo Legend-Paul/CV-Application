@@ -82,7 +82,7 @@ function App() {
             }
         }
     };
-    const handleSubmit = (e) => {
+    const handleSubmit = () => {
         if (canSubmit) {
             setCvDataValues({
                 ...cvDataValues,
@@ -98,15 +98,6 @@ function App() {
                     canUpdate: true,
                 },
             });
-
-            if (e.target.dataset.title === inputFieldsDisplay.buttonType) {
-                setInputFieldsDisplay({
-                    ...inputFieldsDisplay,
-                    display: "inline-block",
-                    isVisible: !inputFieldsDisplay.isVisible,
-                    checkFiedBtnDisplay: "none",
-                });
-            }
         }
     };
 
@@ -300,9 +291,14 @@ function App() {
                 {inputFieldsDisplay.isVisible ? (
                     <i
                         className="bi bi-eye"
-                        data-title="preview"
-                        onClick={handleSubmit}
-                        style={{}}
+                        onClick={() => {
+                            setInputFieldsDisplay({
+                                ...inputFieldsDisplay,
+                                isVisible: !inputFieldsDisplay.isVisible,
+                                display: "block",
+                                checkFiedBtnDisplay: "none",
+                            });
+                        }}
                     ></i>
                 ) : (
                     <i
