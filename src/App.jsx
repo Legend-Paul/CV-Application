@@ -41,7 +41,7 @@ function App() {
     const [inputFieldsDisplay, setInputFieldsDisplay] = useState({
         buttonType: "preview",
         isVisible: true,
-        display: "inline-block",
+        display: "none",
     });
 
     const handleCvDialogInputChange = (e) => {
