@@ -56,6 +56,7 @@ function TextArea({
     name,
     defaultType,
     handleOnchange,
+    handleBlur,
     placeholder,
 }) {
     let value = "";
@@ -72,6 +73,7 @@ function TextArea({
                     value={value}
                     name={name}
                     onChange={handleOnchange}
+                    onBlur={handleBlur}
                     placeholder={placeholder}
                 ></textarea>
             </label>
