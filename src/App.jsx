@@ -41,7 +41,6 @@ function App() {
     const [inputFieldsDisplay, setInputFieldsDisplay] = useState({
         buttonType: "preview",
         isVisible: true,
-        display: "none",
     });
 
     const handleCvDialogInputChange = (e) => {
@@ -107,7 +106,7 @@ function App() {
             <main className="main-content">
                 {/* Render Default Cv sections */}
                 {inputFieldsDisplay.isVisible && (
-                    <div className="cv-section">
+                    <div className="cv-sections">
                         {cvSectionData.map((sectionData, i) => {
                             return (
                                 <Cvsection
@@ -268,7 +267,6 @@ function App() {
                     type="button"
                     onClick={handleSubmit}
                     style={{
-                        display: inputFieldsDisplay.checkFiedBtnDisplay,
                         color:
                             Object.keys(errorMsgObj).length < 1 && canSubmit
                                 ? "var(--blue)"

@@ -8,7 +8,6 @@ export default function PersonalDetailsOverview({
     let personalInfoLinks = urlLink[cvSectionName]
         ? urlLink[cvSectionName]
         : {};
-    console.log(personalInfoLinks);
 
     return (
         <div className="personal-infomation">

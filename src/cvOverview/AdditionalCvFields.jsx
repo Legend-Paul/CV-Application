@@ -59,7 +59,7 @@ export default function AddationCVFields({
                                     if (value) {
                                         return (
                                             <div className="textarea-content">
-                                                <h4>{key}</h4>
+                                                <p>{key}</p>
                                                 <p>{value}</p>
                                             </div>
                                         );

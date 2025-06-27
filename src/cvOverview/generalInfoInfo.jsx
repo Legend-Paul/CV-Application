@@ -78,7 +78,7 @@ export default function GeneralInfo({
                                                 )}
                                                 {field === "textarea" && (
                                                     <div
-                                                        className="description"
+                                                        className="textarea-content"
                                                         id={qualification.toLowerCase()}
                                                     >
                                                         <p>{description}</p>

@@ -25,8 +25,9 @@ main {
     position: relative;
     margin-top: 5rem !important;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr); /* Two equal columns */
     gap: 1rem;
+    height: calc(100vh - 5rem); /* Adjust height to fit the viewport */
 }
 section {
     .section-fields-cont {
@@ -154,7 +155,7 @@ dialog {
 }
 
 .cv-overview {
-    padding-top: 1rem;
+    padding: 1rem 1rem 0 0;
     .personal-infomation {
         .cv-heading {
             padding: 1rem;
@@ -231,16 +232,18 @@ dialog {
                         }
                     }
                 }
-                .description {
-                    display: flex;
-                    gap: 0.5rem;
-                    p {
-                        &:first-child {
-                            width: 6rem;
-                        }
-                    }
-                }
             }
+        }
+    }
+}
+
+.textarea-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    p {
+        &:last-child {
+            margin-left: 2rem;
         }
     }
 }
@@ -275,6 +278,17 @@ dialog {
         color: var(--primary-color);
         cursor: pointer;
     }
+}
+.cv-sections {
+    position: relative !important;
+    overflow-y: auto !important; /* Enable vertical scrolling */
+    height: 100%; /* Ensure the section takes up the full height */
+}
+
+.cv-overview {
+    position: relative !important;
+    overflow-y: auto !important; /* Enable vertical scrolling */
+    height: 100%; /* Ensure the section takes up the full height */
 }
 
 /* media queries */
