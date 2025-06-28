@@ -5,7 +5,7 @@ export default function GeneralInfo({
     knowldedgeSectionFields,
     urlLink,
 }) {
-    const knowledgeInfoObj = updatedCvDataValues[cvSectionName];
+    const generalInfoObj = updatedCvDataValues[cvSectionName];
 
     if (
         updatedCvDataValues[cvSectionName].canUpdate &&
@@ -13,14 +13,14 @@ export default function GeneralInfo({
         Object.keys(updatedCvDataValues[cvSectionName]).length > 1
     )
         return (
-            <div className="knowledge-details-container">
+            <div className={`general-details-container overview-section`}>
                 <h3>{cvSectionName}</h3>
                 {knowldedgeSectionFields[cvSectionName].map((i) => {
                     let id = self.crypto.randomUUID();
 
                     return (
-                        <div key={id} className="knowledge-details">
-                            {Object.entries(knowledgeInfoObj).map((entry) => {
+                        <div key={id} className="general-details">
+                            {Object.entries(generalInfoObj).map((entry) => {
                                 const field = entry[0];
                                 return Object.entries(entry[1]).map((value) => {
                                     if (
@@ -43,7 +43,8 @@ export default function GeneralInfo({
                                         let description = "";
                                         if (
                                             qualification === "Qualification" ||
-                                            qualification === "Experience"
+                                            qualification === "Experience" ||
+                                            cvSectionName === "Projects"
                                         ) {
                                             description =
                                                 value[0].split(" ")[1] + ":";
@@ -52,9 +53,10 @@ export default function GeneralInfo({
                                         let values = value[0].split(" ")[1];
 
                                         console.log(value);
+                                        console.log(urlLink[cvSectionName]);
 
                                         return (
-                                            <div className="knowledge" key={id}>
+                                            <div className="general" key={id}>
                                                 {field !== "textarea" && (
                                                     <div className="name-content">
                                                         <p>{values} : </p>
@@ -62,11 +64,7 @@ export default function GeneralInfo({
                                                             cvSectionName
                                                         ] ? (
                                                             <a
-                                                                href={
-                                                                    urlLink[
-                                                                        cvSectionName
-                                                                    ]
-                                                                }
+                                                                href={value[1]}
                                                                 target="_blank"
                                                             >
                                                                 <p>{values}</p>

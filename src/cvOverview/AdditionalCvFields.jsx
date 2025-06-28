@@ -5,7 +5,7 @@ export default function AddationCVFields({
 }) {
     urlLink = urlLink[cvSectionName];
     return (
-        <div className="section-fields">
+        <div className="section-fields overview-section">
             <div className="personal-details">
                 <h3>{cvSectionName}</h3>
 

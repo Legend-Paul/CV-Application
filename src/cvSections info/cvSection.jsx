@@ -112,7 +112,7 @@ function Cvsection({
                     .join(" ");
                 let placeholder = field.placeholder
                     ? field.placeholder
-                    : "Enter " + name.toLowerCase();
+                    : "Enter " + name.toLowerCase() + index;
                 fields.push({
                     ...field,
                     id: id,
@@ -284,13 +284,13 @@ function Cvsection({
             ? (fieldObj = { ...errorMsgObj })
             : (fieldObj = { ...cvDataValues });
         isError
-            ? chechEmptyField(fieldObj, type, name)
-            : chechEmptyField(fieldObj[activeCvSection.name], type, name);
+            ? checkEmptyField(fieldObj, type, name)
+            : checkEmptyField(fieldObj[activeCvSection.name], type, name);
 
         isError ? setErrorMsgObj(fieldObj) : setCvDataValues(fieldObj);
     };
 
-    const chechEmptyField = (fieldObj, type, name) => {
+    const checkEmptyField = (fieldObj, type, name) => {
         if (fieldObj[type]) {
             if (Object.keys(fieldObj[type]).length > 1) {
                 delete fieldObj[type][name];
