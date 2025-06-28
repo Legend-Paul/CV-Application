@@ -281,14 +281,30 @@ dialog {
 }
 .cv-sections {
     position: relative !important;
-    overflow-y: auto !important; /* Enable vertical scrolling */
-    height: 100%; /* Ensure the section takes up the full height */
+    overflow-y: auto !important;
+    height: 100%;
 }
 
 .cv-overview {
     position: relative !important;
-    overflow-y: auto !important; /* Enable vertical scrolling */
-    height: 100%; /* Ensure the section takes up the full height */
+    overflow-y: auto !important;
+    height: 100%;
+}
+
+.download-cv {
+    position: fixed;
+    top: 7rem;
+    right: 0.25rem;
+    padding: 0.5rem 1rem;
+    display: grid;
+
+    color: var(--moderate-green);
+    background: none;
+    border: none;
+    i {
+        font-size: 2rem;
+        color: var(--moderate-green);
+    }
 }
 
 /* media queries */
@@ -304,6 +320,7 @@ dialog {
         display: block;
     }
     .cv-overview {
+        padding-right: 3.5rem !important;
         display: none;
     }
     .section-fields-cont {

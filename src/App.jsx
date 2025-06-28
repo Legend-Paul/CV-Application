@@ -1,4 +1,5 @@
 import { useState } from "react";
+import html2pdf from "html2pdf.js";
 import { Input, Button } from "./utils/reusableIU";
 import Cvsection from "./cvSections info/cvSection";
 import Header from "./header/header";
@@ -99,6 +100,17 @@ function App() {
             });
         }
     };
+    async function handleCvDownload() {
+        const element = document.querySelector(".cv-overview");
+        const options = {
+            margin: 0.5,
+            filename: "cv.pdf",
+            image: { type: "jpeg", quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+        };
+        await html2pdf().from(element).set(options).save();
+    }
 
     return (
         <div className="App">
@@ -260,6 +272,13 @@ function App() {
                         />;
                     })}
                 </div>
+                <button
+                    class="download-cv"
+                    type="button"
+                    onClick={handleCvDownload}
+                >
+                    <i class="bi bi-file-earmark-arrow-down"></i> Get Cv
+                </button>
             </main>
             <div className="preview-btn-cont">
                 <button
