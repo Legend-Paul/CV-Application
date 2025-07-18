@@ -106,10 +106,26 @@ function App() {
             margin: 0.5,
             filename: "cv.pdf",
             image: { type: "jpeg", quality: 0.98 },
-            html2canvas: { scale: 2 },
-            jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+            html2canvas: {
+                scale: 2,
+                useCORS: true, // Enable cross-origin resource sharing for images
+            },
+            jsPDF: {
+                unit: "in",
+                format: "letter",
+                orientation: "portrait",
+            },
+            pagebreak: { mode: ["avoid-all", "css", "legacy"] }, // Ensure proper page breaks
         };
-        await html2pdf().from(element).set(options).save();
+
+        // Use the `html` rendering mode for selectable text and clickable links
+        await html2pdf()
+            .set(options)
+            .from(element)
+            .toPdf()
+            .get("pdf")
+
+            .save();
     }
 
     return (
