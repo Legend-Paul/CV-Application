@@ -10,7 +10,6 @@ export default function AddationCVFields({
                 <h3>{cvSectionName}</h3>
 
                 {Object.entries(personlInfoObj).map((items) => {
-                    console.log(items);
                     if (items[0] !== "textarea") {
                         return Object.entries(items[1]).map((item) => {
                             const id = self.crypto.randomUUID();
@@ -45,6 +44,17 @@ export default function AddationCVFields({
                                                                 value
                                                             }
                                                             target="_blank"
+                                                            rel="noopener noreferrer"
+                                                        >
+                                                            {value}
+                                                        </a>
+                                                    ) : items[0] === "tel" ? (
+                                                        <a
+                                                            href={
+                                                                "tel:" + value
+                                                            }
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
                                                         >
                                                             {value}
                                                         </a>
