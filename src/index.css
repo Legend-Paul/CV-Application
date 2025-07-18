@@ -50,9 +50,7 @@ i {
     cursor: pointer;
 }
 a {
-    p {
-        color: var(--blue);
-    }
+    color: var(--blue);
 }
 
 .btns {

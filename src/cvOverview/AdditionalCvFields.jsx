@@ -10,13 +10,14 @@ export default function AddationCVFields({
                 <h3>{cvSectionName}</h3>
 
                 {Object.entries(personlInfoObj).map((items) => {
+                    console.log(items);
                     if (items[0] !== "textarea") {
                         return Object.entries(items[1]).map((item) => {
                             const id = self.crypto.randomUUID();
                             const key = item[0];
                             const value = item[1];
 
-                            // Only render if the key is not "Full Name" or "Title"
+                            // Only render if the key is not "Full Name"  "Title" and image
                             if (
                                 value &&
                                 key !== "Full Name" &&
@@ -33,10 +34,24 @@ export default function AddationCVFields({
                                             </p>
                                             {urlLink[key] ? (
                                                 <a href={key} target="_blank">
-                                                    <p>{key}</p>
+                                                    {key}
                                                 </a>
                                             ) : (
-                                                <p>{value}</p>
+                                                <p>
+                                                    {items[0] === "email" ? (
+                                                        <a
+                                                            href={
+                                                                "mailto:" +
+                                                                value
+                                                            }
+                                                            target="_blank"
+                                                        >
+                                                            {value}
+                                                        </a>
+                                                    ) : (
+                                                        value
+                                                    )}
+                                                </p>
                                             )}
                                         </div>
                                     </div>
