@@ -49,6 +49,7 @@ function Cvsection({
     urlLink,
     setUrlLink,
     addsSimalarFields,
+    setUpdatedCvDataValues,
     canSubmit,
     setCanSubmit,
     handleSubmit,
@@ -173,8 +174,9 @@ function Cvsection({
 
     const handleReset = () => {
         setCvDataValues({ ...cvDataValues, [activeCvSection.name]: {} });
+        setUpdatedCvDataValues({});
         setErrorMsgObj(initialState);
-        setCanSubmit(false);
+        setCanSubmit(true);
         setDynamicFields([]);
     };
 
@@ -388,56 +390,67 @@ function Cvsection({
                             </div>
 
                             <div className="buttons-container">
-                                <button
-                                    className="btns"
-                                    type="button"
-                                    onClick={handleReset}
-                                    style={{
-                                        title: "Reset Form",
-                                    }}
-                                >
-                                    ↻
-                                </button>
-                                <button
-                                    className="btns"
-                                    type="button"
-                                    onClick={handleDialogControl}
-                                    style={{
-                                        color: "var(--moderate-green)",
-                                        borderColor: "var(--moderate-green)",
-                                        title: "Add Field",
-                                    }}
-                                >
-                                    ➕
-                                </button>
-                                <button
-                                    className="btns"
-                                    type="button"
-                                    onClick={handleSubmit}
-                                    style={{
-                                        color:
-                                            Object.keys(errorMsgObj).length <
-                                                1 && canSubmit
-                                                ? "var(--blue)"
-                                                : "var(--light-blue)",
-                                        borderColor:
-                                            Object.keys(errorMsgObj).length <
-                                                1 && canSubmit
-                                                ? "var(--blue)"
-                                                : "var(--light-blue)",
-                                        cursor:
-                                            Object.keys(errorMsgObj).length <
-                                                1 && canSubmit
-                                                ? "pointer"
-                                                : "not-allowed",
-                                        title: "Submit",
-                                    }}
-                                    disabled={
-                                        !Object.keys(errorMsgObj).length > 1
-                                    }
-                                >
-                                    ✓
-                                </button>
+                                <div className="btn-cont reset-fields-btn">
+                                    <button
+                                        className="btns"
+                                        type="button"
+                                        onClick={handleReset}
+                                        style={{
+                                            title: "Reset Form",
+                                        }}
+                                    >
+                                        ↻
+                                    </button>
+                                    <p>Reset Fields</p>
+                                </div>
+
+                                <div className="btn-cont add-field-btn">
+                                    <button
+                                        className="btns"
+                                        type="button"
+                                        onClick={handleDialogControl}
+                                        style={{
+                                            color: "var(--moderate-green)",
+                                            borderColor:
+                                                "var(--moderate-green)",
+                                            title: "Add Field",
+                                        }}
+                                    >
+                                        ➕
+                                    </button>
+                                    <p>Add Field</p>
+                                </div>
+                                <div className="btn-cont save-fields-btn">
+                                    <button
+                                        className="btns"
+                                        type="button"
+                                        onClick={handleSubmit}
+                                        style={{
+                                            color:
+                                                Object.keys(errorMsgObj)
+                                                    .length < 1 && canSubmit
+                                                    ? "var(--blue)"
+                                                    : "var(--light-blue)",
+                                            borderColor:
+                                                Object.keys(errorMsgObj)
+                                                    .length < 1 && canSubmit
+                                                    ? "var(--blue)"
+                                                    : "var(--light-blue)",
+                                            cursor:
+                                                Object.keys(errorMsgObj)
+                                                    .length < 1 && canSubmit
+                                                    ? "pointer"
+                                                    : "not-allowed",
+                                            title: "Submit",
+                                        }}
+                                        disabled={
+                                            !Object.keys(errorMsgObj).length > 1
+                                        }
+                                    >
+                                        ✓
+                                    </button>
+                                    <p>Save Changes</p>
+                                </div>
                             </div>
                         </div>
 

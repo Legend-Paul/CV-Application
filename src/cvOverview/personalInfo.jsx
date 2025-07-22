@@ -36,7 +36,7 @@ export default function PersonalDetailsOverview({
             </div>
             <AddationCVFields
                 cvSectionName={cvSectionName}
-                personlInfoObj={personlInfoObj}
+                sectionObj={personlInfoObj}
                 urlLink={urlLink}
             />
         </div>

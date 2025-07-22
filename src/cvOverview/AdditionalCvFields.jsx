@@ -1,6 +1,6 @@
 export default function AddationCVFields({
     cvSectionName,
-    personlInfoObj,
+    sectionObj,
     urlLink,
 }) {
     urlLink = urlLink[cvSectionName];
@@ -9,7 +9,7 @@ export default function AddationCVFields({
             <div className="personal-details">
                 <h3>{cvSectionName}</h3>
 
-                {Object.entries(personlInfoObj).map((items) => {
+                {Object.entries(sectionObj).map((items) => {
                     if (items[0] !== "textarea") {
                         return Object.entries(items[1]).map((item) => {
                             const id = self.crypto.randomUUID();
@@ -74,7 +74,7 @@ export default function AddationCVFields({
                 })}
             </div>
             <div className="textarea-field">
-                {Object.entries(personlInfoObj).map((items) => {
+                {Object.entries(sectionObj).map((items) => {
                     if (items[0] === "textarea") {
                         return (
                             <div className="text-area-cont">

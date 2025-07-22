@@ -256,7 +256,7 @@ function App() {
                     className="cv-overview"
                     style={{ display: inputFieldsDisplay.display }}
                 >
-                    {updatedCvDataValues[initialCvSection].canUpdate && (
+                    {updatedCvDataValues[initialCvSection]?.canUpdate && (
                         <PersonalDetailsOverview
                             updatedCvDataValues={updatedCvDataValues}
                             cvSectionName={initialCvSection}
@@ -297,54 +297,64 @@ function App() {
                 </button>
             </main>
             <div className="preview-btn-cont">
-                <button
-                    className="btns check-fields"
-                    type="button"
-                    onClick={handleSubmit}
-                    style={{
-                        color:
-                            Object.keys(errorMsgObj).length < 1 && canSubmit
-                                ? "var(--blue)"
-                                : "var(--light-blue)",
-                        borderColor:
-                            Object.keys(errorMsgObj).length < 1 && canSubmit
-                                ? "var(--blue)"
-                                : "var(--light-blue)",
-                        cursor:
-                            Object.keys(errorMsgObj).length < 1 && canSubmit
-                                ? "pointer"
-                                : "not-allowed",
-                        title: "Submit",
-                    }}
-                    disabled={!Object.keys(errorMsgObj).length > 1}
-                >
-                    ✓
-                </button>
+                <div className="btn-cont fixed-btn-cont save-fields-btn">
+                    <button
+                        className="btns check-fields"
+                        type="button"
+                        onClick={handleSubmit}
+                        style={{
+                            color:
+                                Object.keys(errorMsgObj).length < 1 && canSubmit
+                                    ? "var(--blue)"
+                                    : "var(--light-blue)",
+                            borderColor:
+                                Object.keys(errorMsgObj).length < 1 && canSubmit
+                                    ? "var(--blue)"
+                                    : "var(--light-blue)",
+                            cursor:
+                                Object.keys(errorMsgObj).length < 1 && canSubmit
+                                    ? "pointer"
+                                    : "not-allowed",
+                            title: "Submit",
+                        }}
+                        disabled={!Object.keys(errorMsgObj).length > 1}
+                    >
+                        ✓
+                    </button>
+                    <p>Save</p>
+                    <p>Changes</p>
+                </div>
 
                 {inputFieldsDisplay.isVisible ? (
-                    <i
-                        className="bi bi-eye"
-                        onClick={() => {
-                            setInputFieldsDisplay({
-                                ...inputFieldsDisplay,
-                                isVisible: !inputFieldsDisplay.isVisible,
-                                display: "block",
-                                checkFiedBtnDisplay: "none",
-                            });
-                        }}
-                    ></i>
+                    <div className="btn-cont fixed-btn-cont toggle-preview-btn-cont">
+                        <i
+                            className="bi bi-eye"
+                            onClick={() => {
+                                setInputFieldsDisplay({
+                                    ...inputFieldsDisplay,
+                                    isVisible: !inputFieldsDisplay.isVisible,
+                                    display: "block",
+                                    checkFiedBtnDisplay: "none",
+                                });
+                            }}
+                        ></i>
+                        <p>View Cv</p>
+                    </div>
                 ) : (
-                    <i
-                        className="bi bi-eye-slash close-preview"
-                        onClick={() => {
-                            setInputFieldsDisplay({
-                                ...inputFieldsDisplay,
-                                isVisible: !inputFieldsDisplay.isVisible,
-                                display: "none",
-                                checkFiedBtnDisplay: "inline-block",
-                            });
-                        }}
-                    ></i>
+                    <div className="btn-cont fixed-btn-cont toggle-preview-btn-cont">
+                        <i
+                            className="bi bi-eye-slash close-preview"
+                            onClick={() => {
+                                setInputFieldsDisplay({
+                                    ...inputFieldsDisplay,
+                                    isVisible: !inputFieldsDisplay.isVisible,
+                                    display: "none",
+                                    checkFiedBtnDisplay: "inline-block",
+                                });
+                            }}
+                        ></i>
+                        <p>Hide Cv</p>
+                    </div>
                 )}
             </div>
         </div>
