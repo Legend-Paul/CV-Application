@@ -2,10 +2,12 @@ export default function AddationCVFields({
     cvSectionName,
     sectionObj,
     urlLink,
+    id,
 }) {
+    console.log(sectionObj);
     urlLink = urlLink[cvSectionName];
     return (
-        <div className="section-fields overview-section">
+        <div key={id} className="section-fields overview-section">
             <div className="personal-details">
                 <h3>{cvSectionName}</h3>
 
@@ -31,7 +33,7 @@ export default function AddationCVFields({
                                             <p className="detail-name">
                                                 {key} :
                                             </p>
-                                            {urlLink[key] ? (
+                                            {urlLink && urlLink[key] ? (
                                                 <a href={key} target="_blank">
                                                     {key}
                                                 </a>

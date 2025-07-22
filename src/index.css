@@ -52,6 +52,10 @@ i {
 a {
     color: var(--blue);
 }
+.error-text {
+    color: var(--red);
+    display: none;
+}
 
 .btns {
     display: flex;
@@ -122,6 +126,12 @@ a {
     p {
         font-size: 0.85rem;
     }
+}
+.add-section-btn {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 .dialog-overlay {
     position: fixed;
@@ -198,18 +208,6 @@ a {
         .personal-details {
             display: grid;
             gap: 1rem;
-
-            .list {
-                display: flex;
-
-                .detail {
-                    display: flex;
-                    gap: 0.5rem;
-                    .detail-name {
-                        width: 10rem;
-                    }
-                }
-            }
         }
         .textarea-field {
             .textarea-content {
@@ -239,6 +237,17 @@ a {
                     }
                 }
             }
+        }
+    }
+}
+.list {
+    display: flex;
+
+    .detail {
+        display: flex;
+        gap: 0.5rem;
+        .detail-name {
+            width: 10rem;
         }
     }
 }

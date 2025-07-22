@@ -50,6 +50,7 @@ function App() {
             cvSectionName: e.target.value,
         };
         setDialogValuesObj(cvSectionObj);
+        document.querySelector(".error-text").style.display = "none";
     };
     const handleDialogControl = () => {
         setDialogValuesObj({
@@ -79,6 +80,8 @@ function App() {
                     state: false,
                     cvSectionName: "",
                 });
+            } else {
+                document.querySelector(".error-text").style.display = "block";
             }
         }
     };
@@ -208,6 +211,9 @@ function App() {
                         {dialogValuesObj.state && (
                             <div className="dialog-overlay">
                                 <div className="dialog-content">
+                                    <p className="error-text">
+                                        Section already exist
+                                    </p>
                                     <Input
                                         // inputValueObj={inputValueObj}
                                         handleOnchange={
@@ -217,6 +223,7 @@ function App() {
                                         placeholder="e.g., Hobbies, Projects"
                                         isDialog={dialogValuesObj}
                                     />
+
                                     <div className="buttons-container">
                                         <Button
                                             buttonTitle="Cancel"
@@ -238,18 +245,23 @@ function App() {
                                 </div>
                             </div>
                         )}
-                        <button
-                            className="btns"
-                            type="button"
+                        <div
+                            className="add-section-btn add-field-btn"
                             onClick={handleDialogControl}
-                            style={{
-                                color: "var(--moderate-green)",
-                                borderColor: "var(--moderate-green)",
-                                title: "Add Field",
-                            }}
                         >
-                            ➕
-                        </button>
+                            <button
+                                className="btns"
+                                type="button"
+                                style={{
+                                    color: "var(--moderate-green)",
+                                    borderColor: "var(--moderate-green)",
+                                    title: "Add Field",
+                                }}
+                            >
+                                ➕
+                            </button>
+                            <p>Add Section</p>
+                        </div>
                     </div>
                 )}{" "}
                 <div
@@ -281,19 +293,28 @@ function App() {
                         );
                     })}
                     {dynamicCvSection.map((cvSection) => {
-                        <AddationCVFields
-                            cvSectionName={cvSection.cvSectionName}
-                            personlInfoObj={cvSection}
-                            urlLink={urlLink}
-                        />;
+                        const sectionName = cvSection?.sectionName;
+                        let id = self.crypto.randomUUID();
+                        return (
+                            updatedCvDataValues[sectionName] && (
+                                <AddationCVFields
+                                    cvSectionName={sectionName}
+                                    sectionObj={
+                                        updatedCvDataValues[sectionName]
+                                    }
+                                    urlLink={urlLink}
+                                    id={id}
+                                />
+                            )
+                        );
                     })}
                 </div>
                 <button
-                    class="download-cv"
+                    className="download-cv"
                     type="button"
                     onClick={handleCvDownload}
                 >
-                    <i class="bi bi-file-earmark-arrow-down"></i> Get Cv
+                    <i className="bi bi-file-earmark-arrow-down"></i> Get Cv
                 </button>
             </main>
             <div className="preview-btn-cont">
