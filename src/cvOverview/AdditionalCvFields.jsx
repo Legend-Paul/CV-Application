@@ -4,7 +4,6 @@ export default function AddationCVFields({
     urlLink,
     id,
 }) {
-    console.log(sectionObj);
     urlLink = urlLink[cvSectionName];
     return (
         <div key={id} className="section-fields overview-section">

@@ -55,6 +55,8 @@ function Cvsection({
     handleSubmit,
     errorMsgObj,
     setErrorMsgObj,
+    dynamicFields,
+    setDynamicFields,
 }) {
     const initialState = {};
     const [dialogValuesObj, setDialogValuesObj] = useState({
@@ -64,7 +66,6 @@ function Cvsection({
     });
     const [isOpen, setIsOpen] = useState(open);
 
-    const [dynamicFields, setDynamicFields] = useState([]);
     let isCvSectionActive = activeCvSection.index == index;
 
     const toggleAccordion = (e) => {
@@ -135,6 +136,8 @@ function Cvsection({
     const handleOnChange = (e) => {
         if (dialogValuesObj.state && e.target.name === "Input Title") {
             // Handle dialog input field name change
+            const errorText = document.querySelector(".error-text");
+            errorText.style.display = "none";
             setDialogValuesObj({
                 ...dialogValuesObj,
                 fieldName: e.target.value,
@@ -182,22 +185,51 @@ function Cvsection({
 
     const handleAddField = () => {
         if (dialogValuesObj.fieldName.trim() && dialogValuesObj.type) {
+            const name = dialogValuesObj.fieldName.trim();
+            const type = dialogValuesObj.type;
+
+            const errorText = document.querySelector(".error-text");
+
             const newField = {
                 id: Date.now(),
-                name: dialogValuesObj.fieldName.trim(),
-                type: dialogValuesObj.type,
+                name,
+                type,
                 placeholder: `Enter ${dialogValuesObj.fieldName.toLowerCase()}`,
                 isLink: dialogValuesObj.link || "",
             };
+            const defaultDataHasField = defaultFields.some(
+                (defaultName) =>
+                    defaultName.name.toLowerCase() === name.toLowerCase()
+            );
 
-            setDynamicFields([...dynamicFields, newField]);
+            const hasType = dynamicFields.some(
+                (field) => field.name.toLowerCase() === name.toLowerCase()
+            );
+
+            switch (defaultDataHasField) {
+                case false:
+                    switch (hasType) {
+                        case false:
+                            errorText.style.display = "none";
+                            setDynamicFields([...dynamicFields, newField]);
+                            setDialogValuesObj({
+                                state: false,
+                                type: "text",
+                                fieldName: "",
+                            });
+                            break;
+
+                        case true:
+                            errorText.style.display = "block";
+                            break;
+                    }
+                    break;
+                case true:
+                    errorText.style.display = "block";
+                    break;
+            }
 
             // Close dialog and reset values
-            setDialogValuesObj({
-                state: false,
-                type: "text",
-                fieldName: "",
-            });
         }
     };
 
@@ -459,6 +491,9 @@ function Cvsection({
                                 <div className="dialog-overlay">
                                     <div className="dialog-content">
                                         <div className="select-input-type">
+                                            <p className="error-text">
+                                                Field already exist
+                                            </p>
                                             <p>Select input type</p>
                                             <NewInputFieldSelection
                                                 handleAddFieldType={

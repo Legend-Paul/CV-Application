@@ -32,6 +32,7 @@ function App() {
     const [canSubmit, setCanSubmit] = useState(true);
 
     const [dynamicCvSection, setDynamicCvSection] = useState([]);
+    const [dynamicFields, setDynamicFields] = useState([]);
 
     const [knowldedgeSectionFields, setKnowldedgeSectionFields] = useState({
         [cvSectionData[1].sectionName]: [1],
@@ -171,6 +172,8 @@ function App() {
                                     handleSubmit={handleSubmit}
                                     errorMsgObj={errorMsgObj}
                                     setErrorMsgObj={setErrorMsgObj}
+                                    dynamicFields={dynamicFields}
+                                    setDynamicFields={setDynamicFields}
                                 />
                             );
                         })}
@@ -205,6 +208,8 @@ function App() {
                                     handleSubmit={handleSubmit}
                                     errorMsgObj={errorMsgObj}
                                     setErrorMsgObj={setErrorMsgObj}
+                                    dynamicFields={dynamicFields}
+                                    setDynamicFields={setDynamicFields}
                                 />
                             );
                         })}
@@ -294,16 +299,16 @@ function App() {
                     })}
                     {dynamicCvSection.map((cvSection) => {
                         const sectionName = cvSection?.sectionName;
-                        let id = self.crypto.randomUUID();
                         return (
                             updatedCvDataValues[sectionName] && (
                                 <AddationCVFields
+                                    key={cvSection.id} // Use a stable key
                                     cvSectionName={sectionName}
                                     sectionObj={
                                         updatedCvDataValues[sectionName]
                                     }
                                     urlLink={urlLink}
-                                    id={id}
+                                    id={cvSection.id}
                                 />
                             )
                         );
@@ -366,11 +371,14 @@ function App() {
                         <i
                             className="bi bi-eye-slash close-preview"
                             onClick={() => {
-                                setInputFieldsDisplay({
-                                    ...inputFieldsDisplay,
-                                    isVisible: !inputFieldsDisplay.isVisible,
-                                    display: "none",
-                                    checkFiedBtnDisplay: "inline-block",
+                                setInputFieldsDisplay(() => {
+                                    return {
+                                        ...inputFieldsDisplay,
+                                        isVisible:
+                                            !inputFieldsDisplay.isVisible,
+                                        display: "none",
+                                        checkFiedBtnDisplay: "inline-block",
+                                    };
                                 });
                             }}
                         ></i>

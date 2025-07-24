@@ -116,7 +116,7 @@ function Accordion({
             }));
         }
     }, [cvDataValues, sectionName, setCvDataValues]);
-
+    console.log(cvDataValues);
     useEffect(() => {
         if (!knowldedgeSectionFields[sectionName] && addsSimalarFields)
             setKnowldedgeSectionFields({
