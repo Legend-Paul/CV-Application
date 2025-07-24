@@ -9,6 +9,7 @@
     --white: #fffff0;
     --light-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     --heavy-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    --small-transition: all 0.25s ease-out;
 }
 * {
     margin: 0;
@@ -84,6 +85,7 @@ a {
         color: var(--white);
         cursor: pointer;
         transform: all 0.2s ease-out;
+        transition: var(--small-transition);
         &:active {
             transform: scale(1.1);
         }
@@ -307,6 +309,13 @@ a {
 .fixed-btn-cont {
     display: flex;
     gap: 0.25rem;
+    i,
+    button {
+        transition: var(--small-transition);
+        &:active {
+            transform: scale(1.1);
+        }
+    }
 }
 .toggle-preview-btn-cont {
     display: none;
@@ -335,10 +344,10 @@ a {
     i {
         font-size: 2rem;
         color: var(--moderate-green);
-        transition: all 0.25s ease-out;
+        transition: var(--small-transition);
         &:active {
             color: green;
-            transform: scale(0.9);
+            transform: scale(1.1);
         }
     }
 }
