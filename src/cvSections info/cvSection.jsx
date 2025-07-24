@@ -88,14 +88,18 @@ function Cvsection({
             link: link,
         });
     };
-
+    console.log(addsSimalarFields);
     const handleDialogControl = () => {
         if (addsSimalarFields) {
             let index = 2;
-            if (dynamicFields.length)
-                index = dynamicFields.length / defaultFields.length + index;
+            if (dynamicFields[heading]?.length) {
+                index =
+                    dynamicFields[heading].length / defaultFields.length +
+                    index;
+            }
 
-            let fields = [...dynamicFields];
+            let fields = [...(dynamicFields[heading] || [])]; // Get existing fields for this section
+
             setKnowldedgeSectionFields({
                 ...knowldedgeSectionFields,
                 [activeCvSection.name]: [
@@ -104,7 +108,7 @@ function Cvsection({
                 ],
             });
 
-            defaultFields.map((field) => {
+            defaultFields.forEach((field) => {
                 let id = self.crypto.randomUUID();
                 let name = field.name
                     .split(" ")
@@ -115,15 +119,20 @@ function Cvsection({
                 let placeholder = field.placeholder
                     ? field.placeholder
                     : "Enter " + name.toLowerCase() + index;
+
                 fields.push({
                     ...field,
                     id: id,
                     name: name,
                     placeholder: placeholder,
                 });
-                return field;
             });
-            setDynamicFields([...fields]);
+
+            // Update dynamicFields for the specific section
+            setDynamicFields((prev) => ({
+                ...prev,
+                [heading]: fields,
+            }));
         } else {
             setDialogValuesObj({
                 state: !dialogValuesObj.state,
@@ -202,16 +211,21 @@ function Cvsection({
                     defaultName.name.toLowerCase() === name.toLowerCase()
             );
 
-            const hasType = dynamicFields.some(
-                (field) => field.name.toLowerCase() === name.toLowerCase()
-            );
-
+            let hasType = dynamicFields[activeCvSection.name];
+            hasType
+                ? (hasType = dynamicFields[activeCvSection.name].some(
+                      (field) => field.name.toLowerCase() === name.toLowerCase()
+                  ))
+                : (hasType = false);
             switch (defaultDataHasField) {
                 case false:
                     switch (hasType) {
                         case false:
                             errorText.style.display = "none";
-                            setDynamicFields([...dynamicFields, newField]);
+                            setDynamicFields((prev) => ({
+                                ...prev,
+                                [heading]: [...(prev[heading] || []), newField], // Add field to the specific section
+                            }));
                             setDialogValuesObj({
                                 state: false,
                                 type: "text",
@@ -232,6 +246,7 @@ function Cvsection({
             // Close dialog and reset values
         }
     };
+    console.log(dynamicFields);
 
     const addFieldToObj = (stateObj, type, name, value) => {
         return {
@@ -388,37 +403,54 @@ function Cvsection({
                                     );
                                 })}
                                 {/* Render dynamic fields */}
-                                {dynamicFields.map((field) => {
-                                    if (field.type === "textarea") {
-                                        return (
-                                            <TextArea
-                                                key={field.id}
-                                                cvDataValues={
-                                                    cvDataValues[heading]
-                                                }
-                                                name={field.name}
-                                                defaultType="textarea"
-                                                handleOnchange={handleOnChange}
-                                                placeholder={field.placeholder}
-                                                handleBlur={handleBlur}
-                                                errorMsgObj={errorMsgObj}
-                                            />
-                                        );
-                                    }
-                                    return (
-                                        <Input
-                                            key={field.id}
-                                            cvDataValues={cvDataValues[heading]}
-                                            handleOnchange={handleOnChange}
-                                            name={field.name}
-                                            defaultType={field.type}
-                                            placeholder={field.placeholder}
-                                            handleBlur={handleBlur}
-                                            errorMsgObj={errorMsgObj}
-                                            isLink={field.isLink}
-                                        />
-                                    );
-                                })}
+                                {dynamicFields[activeCvSection.name] &&
+                                    dynamicFields[activeCvSection.name].map(
+                                        (field) => {
+                                            if (field.type === "textarea") {
+                                                return (
+                                                    <TextArea
+                                                        key={field.id}
+                                                        cvDataValues={
+                                                            cvDataValues[
+                                                                heading
+                                                            ]
+                                                        }
+                                                        name={field.name}
+                                                        defaultType="textarea"
+                                                        handleOnchange={
+                                                            handleOnChange
+                                                        }
+                                                        placeholder={
+                                                            field.placeholder
+                                                        }
+                                                        handleBlur={handleBlur}
+                                                        errorMsgObj={
+                                                            errorMsgObj
+                                                        }
+                                                    />
+                                                );
+                                            }
+                                            return (
+                                                <Input
+                                                    key={field.id}
+                                                    cvDataValues={
+                                                        cvDataValues[heading]
+                                                    }
+                                                    handleOnchange={
+                                                        handleOnChange
+                                                    }
+                                                    name={field.name}
+                                                    defaultType={field.type}
+                                                    placeholder={
+                                                        field.placeholder
+                                                    }
+                                                    handleBlur={handleBlur}
+                                                    errorMsgObj={errorMsgObj}
+                                                    isLink={field.isLink}
+                                                />
+                                            );
+                                        }
+                                    )}
                             </div>
 
                             <div className="buttons-container">
