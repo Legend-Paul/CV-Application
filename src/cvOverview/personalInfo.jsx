@@ -8,10 +8,13 @@ export default function PersonalDetailsOverview({
     let personalInfoLinks = urlLink[cvSectionName]
         ? urlLink[cvSectionName]
         : {};
-
     return (
         <div className="personal-infomation">
-            <div className="cv-heading">
+            <div
+                className={
+                    Object.keys(personlInfoObj).length > 1 ? "cv-heading" : ""
+                }
+            >
                 <div className="image">
                     {personalInfoLinks["Image"] && (
                         <img

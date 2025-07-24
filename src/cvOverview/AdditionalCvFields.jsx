@@ -7,8 +7,12 @@ export default function AddationCVFields({
     urlLink = urlLink[cvSectionName];
     return (
         <div key={id} className="section-fields overview-section">
-            <div className="personal-details">
-                <h3>{cvSectionName}</h3>
+            <div
+                className={
+                    Object.keys(sectionObj).length > 1 ? "personal-details" : ""
+                }
+            >
+                <h3>{Object.keys(sectionObj).length > 1 && cvSectionName}</h3>
 
                 {Object.entries(sectionObj).map((items) => {
                     if (items[0] !== "textarea") {

@@ -52,9 +52,6 @@ export default function GeneralInfo({
 
                                         let values = value[0].split(" ")[1];
 
-                                        console.log(value);
-                                        console.log(urlLink[cvSectionName]);
-
                                         return (
                                             <div className="general" key={id}>
                                                 {field !== "textarea" && (

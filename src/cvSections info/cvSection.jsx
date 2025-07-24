@@ -49,7 +49,6 @@ function Cvsection({
     urlLink,
     setUrlLink,
     addsSimalarFields,
-    setUpdatedCvDataValues,
     canSubmit,
     setCanSubmit,
     handleSubmit,
@@ -88,7 +87,7 @@ function Cvsection({
             link: link,
         });
     };
-    console.log(addsSimalarFields);
+
     const handleDialogControl = () => {
         if (addsSimalarFields) {
             let index = 2;
@@ -186,7 +185,7 @@ function Cvsection({
 
     const handleReset = () => {
         setCvDataValues({ ...cvDataValues, [activeCvSection.name]: {} });
-        setUpdatedCvDataValues({});
+
         setErrorMsgObj(initialState);
         setCanSubmit(true);
         setDynamicFields([]);
@@ -246,7 +245,6 @@ function Cvsection({
             // Close dialog and reset values
         }
     };
-    console.log(dynamicFields);
 
     const addFieldToObj = (stateObj, type, name, value) => {
         return {
