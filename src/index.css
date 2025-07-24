@@ -23,6 +23,7 @@
     overflow: hidden;
 }
 main {
+    font-size: 1.25rem;
     position: relative;
     margin-top: 5rem !important;
     display: grid;
@@ -234,7 +235,7 @@ a {
                     display: flex;
                     p {
                         &:first-child {
-                            width: 10rem;
+                            min-width: 15rem;
                         }
                     }
                 }
@@ -249,7 +250,7 @@ a {
         display: flex;
         gap: 0.5rem;
         .detail-name {
-            width: 10rem;
+            min-width: 15rem;
         }
     }
 }
