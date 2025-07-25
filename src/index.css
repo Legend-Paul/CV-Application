@@ -189,8 +189,7 @@ a {
             gap: 1rem;
 
             .image {
-                width: 75px;
-                height: 75px;
+                width: 100px;
 
                 overflow: hidden;
                 img {
@@ -235,7 +234,7 @@ a {
                     display: flex;
                     p {
                         &:first-child {
-                            min-width: 15rem;
+                            min-width: 25%;
                         }
                     }
                 }
@@ -250,7 +249,7 @@ a {
         display: flex;
         gap: 0.5rem;
         .detail-name {
-            min-width: 15rem;
+            min-width: 25%;
         }
     }
 }
