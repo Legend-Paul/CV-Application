@@ -45,7 +45,7 @@ export default function GeneralInfo({
 
                     let values = value[0].split(" ")[1];
                     values =
-                      values === "Start" && value[1] === generateDate()
+                      values === "Start" 
                         ? "From"
                         : values;
                     values =
