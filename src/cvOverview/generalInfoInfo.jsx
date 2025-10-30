@@ -44,6 +44,14 @@ export default function GeneralInfo({
                     }
 
                     let values = value[0].split(" ")[1];
+                    values =
+                      values === "Start" && value[1] === generateDate()
+                        ? "From"
+                        : values;
+                    values =
+                      values === "End" && value[1] === generateDate()
+                        ? "To"
+                        : values;
 
                     return (
                       <div className="general" key={id}>
