@@ -63,11 +63,7 @@ export default function GeneralInfo({
                                 <p>{values}</p>
                               </a>
                             ) : (
-                              <p>
-                                {values === "End" && value[1] === generateDate()
-                                  ? "Present"
-                                  : value[1]}
-                              </p>
+                              <p>{values === "To" ? "Present" : value[1]}</p>
                             )}
                           </div>
                         )}
