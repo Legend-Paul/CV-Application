@@ -167,7 +167,7 @@ a {
 }
 .personal-infomation,
 .overview-section {
-    border-bottom: 2px solid var(--medium-grey);
+   /* border-bottom: 2px solid var(--medium-grey); */
     padding-bottom: 1.5rem;
     &:last-child {
         border-bottom: none;
