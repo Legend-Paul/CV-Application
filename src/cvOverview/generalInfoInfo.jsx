@@ -44,10 +44,7 @@ export default function GeneralInfo({
                     }
 
                     let values = value[0].split(" ")[1];
-                    values =
-                      values === "Start" 
-                        ? "From"
-                        : values;
+                    values = values === "Start" ? "From" : values;
                     values =
                       values === "End" && value[1] === generateDate()
                         ? "To"
@@ -59,7 +56,11 @@ export default function GeneralInfo({
                           <div className="name-content">
                             <p>{values} : </p>
                             {urlLink[cvSectionName] ? (
-                              <a href={value[1]} target="_blank">
+                              <a
+                                className="general-info-link"
+                                href={value[1]}
+                                target="_blank"
+                              >
                                 <p>{values}</p>
                               </a>
                             ) : (

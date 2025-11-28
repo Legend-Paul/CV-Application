@@ -256,6 +256,9 @@ a {
     }
   }
 }
+.general-info-link {
+  color: var(--blue) !important;
+}
 .input-field {
   .textarea-label {
     padding-bottom: 2rem;
