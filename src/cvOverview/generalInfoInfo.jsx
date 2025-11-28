@@ -61,7 +61,7 @@ export default function GeneralInfo({
                                 href={value[1]}
                                 target="_blank"
                               >
-                                <p>{values}</p>
+                                {values}
                               </a>
                             ) : (
                               <p>{values === "To" ? "Present" : value[1]}</p>

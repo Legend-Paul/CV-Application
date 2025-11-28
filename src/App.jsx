@@ -305,6 +305,8 @@ function App() {
             );
           })}
         </div>
+      </main>
+      <div className="action-btn-cont">
         <button
           className="download-cv"
           type="button"
@@ -312,8 +314,7 @@ function App() {
         >
           <i className="bi bi-file-earmark-arrow-down"></i> Get Cv
         </button>
-      </main>
-      <div className="preview-btn-cont">
+
         <div className="btn-cont fixed-btn-cont save-fields-btn">
           <button
             className="btns check-fields"
