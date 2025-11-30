@@ -313,7 +313,7 @@ function App() {
             type="button"
             onClick={handleCvDownload}
           >
-            <i class="bi bi-download"></i>
+            <i className="bi bi-download"></i>
           </button>
           <p>Download Cv </p>
         </div>

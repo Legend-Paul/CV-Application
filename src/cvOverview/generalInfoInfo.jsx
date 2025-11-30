@@ -61,7 +61,9 @@ export default function GeneralInfo({
                                 href={value[1]}
                                 target="_blank"
                               >
-                                {values}
+                                {values == "Code" || values == "Preview"
+                                  ? values + " Link"
+                                  : values}
                               </a>
                             ) : (
                               <p>{values === "To" ? "Present" : value[1]}</p>
