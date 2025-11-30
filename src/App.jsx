@@ -307,13 +307,16 @@ function App() {
         </div>
       </main>
       <div className="action-btn-cont">
-        <button
-          className="download-cv"
-          type="button"
-          onClick={handleCvDownload}
-        >
-          <i className="bi bi-file-earmark-arrow-down"></i> Get Cv
-        </button>
+        <div className="download-cv-cont">
+          <button
+            className="download-cv"
+            type="button"
+            onClick={handleCvDownload}
+          >
+            <i class="bi bi-download"></i>
+          </button>
+          <p>Download Cv </p>
+        </div>
 
         <div className="btn-cont fixed-btn-cont save-fields-btn">
           <button
@@ -339,8 +342,7 @@ function App() {
           >
             ✓
           </button>
-          <p>Save</p>
-          <p>Changes</p>
+          <p>Save Changes</p>
         </div>
 
         {inputFieldsDisplay.isVisible ? (

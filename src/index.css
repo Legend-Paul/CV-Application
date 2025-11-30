@@ -285,9 +285,9 @@ a {
 
 .action-btn-cont {
   position: fixed;
-  bottom: 2rem;
+  bottom: 1rem;
   right: 50%;
-  transform: translateX(50%);
+  transform: translateX(100%);
 
   display: flex;
   justify-content: center;
@@ -298,25 +298,25 @@ a {
 
   padding: 0.25rem 0.5;
   border-radius: 0.5rem;
-  background-color: var(--medium-grey);
+  /* background-color: var(--medium-grey); */
   button {
-    width: 2rem;
-    height: 2rem;
+    width: 1.5rem;
+    /* height: 2rem; */
   }
   p {
     margin-bottom: 0;
     padding: 0;
   }
   i {
-    display: none;
-    font-size: 2.5rem;
+    display: inline-block;
+    font-size: 1.5rem;
     color: var(--primary-color);
     cursor: pointer;
   }
 }
 .fixed-btn-cont {
   display: flex;
-  gap: 0.25rem;
+  gap: 0.5rem;
   i,
   button {
     transition: var(--small-transition);
@@ -327,8 +327,13 @@ a {
 }
 .toggle-preview-btn-cont {
   display: none;
+  gap: 1rem;
   p {
     color: var(--primary-color) !important;
+  }
+  i {
+    font-size: 1.5rem;
+    padding: 0;
   }
 }
 
@@ -339,18 +344,30 @@ a {
   height: 100%;
 }
 
+.download-cv-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* gap: 0.5rem; */
+  p {
+    font-size: 0.85rem;
+    color: var(--moderate-green);
+  }
+}
 .download-cv {
-  position: fixed;
-  top: 6rem;
-  right: 0rem;
   padding: 0.5rem 1rem;
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-  color: var(--moderate-green);
   background: none;
   border: none;
+  cursor: pointer;
+
   i {
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: var(--moderate-green);
     transition: var(--small-transition);
     &:active {
@@ -376,7 +393,8 @@ a {
     }
   }
   .toggle-preview-btn-cont {
-    display: inline-block;
+    display: flex;
+    gap: 0;
   }
   main {
     display: block;
