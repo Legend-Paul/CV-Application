@@ -338,6 +338,9 @@ a {
   }
 }
 
+.section-fields-cont {
+  padding-right: 1rem !important;
+}
 .cv-sections,
 .cv-overview {
   position: relative;
