@@ -83,7 +83,7 @@ function Cvsection({
 
     setDialogValuesObj({
       ...dialogValuesObj,
-      type: e.target.value,
+      type: e.target.value === "link" ? "text" : e.target.value,
       link: link,
     });
   };
@@ -144,6 +144,7 @@ function Cvsection({
       // Handle dialog input field name change
       const errorText = document.querySelector(".error-text");
       errorText.style.display = "none";
+
       setDialogValuesObj({
         ...dialogValuesObj,
         fieldName: e.target.value,
@@ -151,6 +152,7 @@ function Cvsection({
     } else {
       // Handle regular form field changes
       let { type, name, value, files } = e.target;
+
       let url = null;
 
       if (type === "file" && files) {
