@@ -55,7 +55,7 @@ export default function GeneralInfo({
                         {field !== "textarea" && (
                           <div className="name-content">
                             <p>{values} : </p>
-                            {urlLink[cvSectionName] ? (
+                            {field === "url" ? (
                               <a
                                 className="general-info-link"
                                 href={value[1]}

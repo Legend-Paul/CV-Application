@@ -165,16 +165,16 @@ let cvSectionData = [
       {
         id: self.crypto.randomUUID(),
         name: "Project1 Code Link",
-        type: "text",
+        type: "url",
         placeholder: "https://github.com/username/weather-app",
-        isLink: "isLink",
+        isLink: "",
       },
       {
         id: self.crypto.randomUUID(),
         name: "Project1 Preview Link",
-        type: "text",
+        type: "url",
         placeholder: "https://weather-app-demo.com",
-        isLink: "isLink",
+        isLink: "",
       },
       {
         id: self.crypto.randomUUID(),

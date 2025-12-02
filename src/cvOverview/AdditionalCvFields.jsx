@@ -32,11 +32,7 @@ export default function AddationCVFields({
                     <div className="detail">
                       {" "}
                       <p className="detail-name">{key} :</p>
-                      {urlLink && urlLink[key] ? (
-                        <a href={value} target="_blank">
-                          {key}
-                        </a>
-                      ) : (
+                      {
                         <p>
                           {items[0] === "email" ? (
                             <a
@@ -45,6 +41,14 @@ export default function AddationCVFields({
                               rel="noopener noreferrer"
                             >
                               {value}
+                            </a>
+                          ) : items[0] === "url" ? (
+                            <a
+                              href={value}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {key + " link"}
                             </a>
                           ) : items[0] === "tel" ? (
                             <a
@@ -58,7 +62,7 @@ export default function AddationCVFields({
                             value
                           )}
                         </p>
-                      )}
+                      }
                     </div>
                   </div>
                 );
