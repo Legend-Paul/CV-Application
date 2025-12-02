@@ -12,7 +12,7 @@ function NewInputFieldSelection({ handleAddFieldType, selectedType }) {
       <option data-link="" value="text">
         Text Field
       </option>
-      <option data-link="isLink" value="link">
+      <option data-link="" value="url">
         Link Field
       </option>
       <option data-link="" value="email">
@@ -83,7 +83,7 @@ function Cvsection({
 
     setDialogValuesObj({
       ...dialogValuesObj,
-      type: e.target.value === "link" ? "text" : e.target.value,
+      type: e.target.value,
       link: link,
     });
   };
@@ -144,7 +144,6 @@ function Cvsection({
       // Handle dialog input field name change
       const errorText = document.querySelector(".error-text");
       errorText.style.display = "none";
-
       setDialogValuesObj({
         ...dialogValuesObj,
         fieldName: e.target.value,
@@ -152,7 +151,6 @@ function Cvsection({
     } else {
       // Handle regular form field changes
       let { type, name, value, files } = e.target;
-
       let url = null;
 
       if (type === "file" && files) {
@@ -263,6 +261,19 @@ function Cvsection({
       if (value && !emailRegex.test(value)) {
         setErrorMsgObj(
           addFieldToObj(errorMsgObj, type, name, "Invalid Email Address")
+        );
+        setCanSubmit(false);
+      } else {
+        removeEmptyFields(type, name, true);
+
+        setCanSubmit(true);
+      }
+    }
+
+    if (type === "url") {
+      if (value && !urlRegex.test(value)) {
+        setErrorMsgObj(
+          addFieldToObj(errorMsgObj, type, name, "Invalid Url Link")
         );
         setCanSubmit(false);
       } else {
