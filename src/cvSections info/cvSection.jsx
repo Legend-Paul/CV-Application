@@ -12,7 +12,7 @@ function NewInputFieldSelection({ handleAddFieldType, selectedType }) {
       <option data-link="" value="text">
         Text Field
       </option>
-      <option data-link="isLink" value="text">
+      <option data-link="isLink" value="link">
         Link Field
       </option>
       <option data-link="" value="email">
