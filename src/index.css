@@ -23,6 +23,7 @@
   overflow: hidden;
 }
 main {
+  padding-bottom: 2rem;
   font-size: 1.25rem;
   position: relative;
   margin-top: 5rem !important;
