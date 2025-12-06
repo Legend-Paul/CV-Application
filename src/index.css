@@ -23,7 +23,7 @@
   overflow: hidden;
 }
 main {
-  padding-bottom: 2rem;
+  /* padding-bottom: 2rem; */
   font-size: 1.25rem;
   position: relative;
   margin-top: 5rem !important;
@@ -351,6 +351,7 @@ a {
   position: relative;
   overflow-y: auto;
   height: 100%;
+  padding: 0 1rem;
 }
 
 .download-cv-cont {
