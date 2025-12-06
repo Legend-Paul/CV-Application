@@ -75,7 +75,6 @@ export default function GeneralInfo({
                             className="textarea-content"
                             id={qualification.toLowerCase()}
                           >
-                            <p>{description}</p>
                             <p>{value[1]}</p>
                           </div>
                         )}
