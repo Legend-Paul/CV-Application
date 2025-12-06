@@ -311,6 +311,7 @@ a {
   p {
     margin-bottom: 0;
     padding: 0;
+    text-align: center;
   }
   i {
     display: inline-block;
@@ -361,6 +362,7 @@ a {
   p {
     font-size: 0.85rem;
     color: var(--moderate-green);
+    text-align: center;
   }
 }
 .download-cv {
