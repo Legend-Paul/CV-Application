@@ -229,11 +229,12 @@ a {
 
     .general-details {
       display: grid;
-      gap: 0.5rem;
+      /* gap: 0.5rem; */
 
       padding-bottom: 0.5rem;
       .general {
         padding-left: 1rem;
+        margin-bottom: 0.5rem;
         .name-content {
           display: flex;
           p {
@@ -276,7 +277,7 @@ a {
   gap: 0.5rem;
   p {
     &:last-child {
-      margin-left: 2rem;
+      margin-top: 0.5rem;
     }
   }
 }
