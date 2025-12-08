@@ -55,19 +55,40 @@ export default function GeneralInfo({
                         {field !== "textarea" && (
                           <div className="name-content">
                             <p>{values} : </p>
-                            {field === "url" ? (
-                              <a
-                                className="general-info-link"
-                                href={value[1]}
-                                target="_blank"
-                              >
-                                {values == "Code" || values == "Preview"
-                                  ? values + " Link"
-                                  : values}
-                              </a>
-                            ) : (
-                              <p>{values === "To" ? "Present" : value[1]}</p>
-                            )}
+
+                            {
+                              <p>
+                                {field === "email" ? (
+                                  <a
+                                    href={"mailto:" + value[1]}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    {value[1]}
+                                  </a>
+                                ) : field === "url" ? (
+                                  <a
+                                    href={value[1]}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    {values == "Code" || values == "Preview"
+                                      ? values + " Link"
+                                      : values}
+                                  </a>
+                                ) : field === "tel" ? (
+                                  <a
+                                    href={"tel:" + value[1]}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    {value[1]}
+                                  </a>
+                                ) : (
+                                  value[1]
+                                )}
+                              </p>
+                            }
                           </div>
                         )}
                         {field === "textarea" && (

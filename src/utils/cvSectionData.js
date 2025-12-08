@@ -217,7 +217,7 @@ let cvSectionData = [
     fields: [
       {
         id: self.crypto.randomUUID(),
-        name: "Referee1",
+        name: "Referee1 Name",
         type: "text",
         placeholder: "Maina Paul",
         isLink: "",
