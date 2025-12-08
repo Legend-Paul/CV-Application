@@ -307,22 +307,20 @@ function App() {
         </div>
       </main>
       <div className="action-btn-cont">
-        <div className="download-cv-cont">
-          <button
-            className="download-cv"
-            type="button"
-            onClick={handleCvDownload}
-          >
+        <div className="download-cv-cont" onClick={handleCvDownload}>
+          <button className="download-cv" type="button">
             <i className="bi bi-download"></i>
           </button>
           <p>Download Cv </p>
         </div>
 
-        <div className="btn-cont fixed-btn-cont save-fields-btn">
+        <div
+          className="btn-cont fixed-btn-cont save-fields-btn"
+          onClick={handleSubmit}
+        >
           <button
             className="btns check-fields"
             type="button"
-            onClick={handleSubmit}
             style={{
               color:
                 Object.keys(errorMsgObj).length < 1 && canSubmit
@@ -346,35 +344,35 @@ function App() {
         </div>
 
         {inputFieldsDisplay.isVisible ? (
-          <div className="btn-cont fixed-btn-cont toggle-preview-btn-cont">
-            <i
-              className="bi bi-eye"
-              onClick={() => {
-                setInputFieldsDisplay({
-                  ...inputFieldsDisplay,
-                  isVisible: !inputFieldsDisplay.isVisible,
-                  display: "block",
-                  checkFiedBtnDisplay: "none",
-                });
-              }}
-            ></i>
+          <div
+            className="btn-cont fixed-btn-cont toggle-preview-btn-cont"
+            onClick={() => {
+              setInputFieldsDisplay({
+                ...inputFieldsDisplay,
+                isVisible: !inputFieldsDisplay.isVisible,
+                display: "block",
+                checkFiedBtnDisplay: "none",
+              });
+            }}
+          >
+            <i className="bi bi-eye"></i>
             <p>View Cv</p>
           </div>
         ) : (
-          <div className="btn-cont fixed-btn-cont toggle-preview-btn-cont">
-            <i
-              className="bi bi-eye-slash close-preview"
-              onClick={() => {
-                setInputFieldsDisplay(() => {
-                  return {
-                    ...inputFieldsDisplay,
-                    isVisible: !inputFieldsDisplay.isVisible,
-                    display: "none",
-                    checkFiedBtnDisplay: "inline-block",
-                  };
-                });
-              }}
-            ></i>
+          <div
+            className="btn-cont fixed-btn-cont toggle-preview-btn-cont"
+            onClick={() => {
+              setInputFieldsDisplay(() => {
+                return {
+                  ...inputFieldsDisplay,
+                  isVisible: !inputFieldsDisplay.isVisible,
+                  display: "none",
+                  checkFiedBtnDisplay: "inline-block",
+                };
+              });
+            }}
+          >
+            <i className="bi bi-eye-slash close-preview"></i>
             <p>Hide Cv</p>
           </div>
         )}

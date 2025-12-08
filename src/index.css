@@ -323,6 +323,7 @@ a {
 }
 .fixed-btn-cont {
   display: flex;
+  cursor: pointer;
   gap: 0.5rem;
   i,
   button {
@@ -352,10 +353,11 @@ a {
   position: relative;
   overflow-y: auto;
   height: 100%;
-  padding: 0 1rem;
+  padding: 1.5rem;
 }
 
 .download-cv-cont {
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
