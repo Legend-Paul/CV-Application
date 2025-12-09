@@ -209,7 +209,7 @@ let cvSectionData = [
     ],
   },
   {
-    sectionName: "Referee",
+    sectionName: "Referees",
     id: self.crypto.randomUUID(),
     class: "referee cv-section",
     addsSimalarFields: true,
@@ -217,7 +217,7 @@ let cvSectionData = [
     fields: [
       {
         id: self.crypto.randomUUID(),
-        name: "Referee1 Name",
+        name: "Referee1",
         type: "text",
         placeholder: "Maina Paul",
         isLink: "",

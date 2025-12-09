@@ -38,7 +38,8 @@ export default function GeneralInfo({
                     if (
                       qualification === "Qualification" ||
                       qualification === "Experience" ||
-                      cvSectionName === "Projects"
+                      cvSectionName === "Projects" ||
+                      cvSectionName === "Referees"
                     ) {
                       description = value[0].split(" ")[1] + ":";
                     }
