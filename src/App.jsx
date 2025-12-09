@@ -144,9 +144,41 @@ function App() {
       .save();
   }
 
+  window.addEventListener("close", () => {
+    handleLoadCV();
+  });
+  function handleSaveCV() {
+    const cvData = {
+      cvDataValues,
+      updatedCvDataValues,
+      dynamicCvSection,
+      knowldedgeSectionFields,
+      urlLink,
+    };
+    localStorage.setItem("cvData", JSON.stringify(cvData));
+  }
+
+  function handleLoadCV() {
+    const savedCvData = localStorage.getItem("cvData");
+    if (savedCvData) {
+      const {
+        cvDataValues,
+        updatedCvDataValues,
+        dynamicCvSection,
+        knowldedgeSectionFields,
+        urlLink,
+      } = JSON.parse(savedCvData);
+      setCvDataValues(cvDataValues);
+      setUpdatedCvDataValues(updatedCvDataValues);
+      setDynamicCvSection(dynamicCvSection);
+      setKnowldedgeSectionFields(knowldedgeSectionFields);
+      setUrlLink(urlLink);
+    }
+  }
+
   return (
     <div className="App">
-      <Header />
+      <Header handleSaveCV={handleSaveCV} handleLoadCV={handleLoadCV} />
       <main className="main-content">
         {/* Render Default Cv sections */}
         {inputFieldsDisplay.isVisible && (
