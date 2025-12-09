@@ -1,10 +1,10 @@
 :root {
-  --primary-color: #ff7f7f;
+  --primary-color: #f36464;
   --red: #f4402f;
   --medium-grey: #7f7f7f;
-  --blue: #0d72ba;
+  --blue: #0b5f9b;
   --light-blue: #76c3fa;
-  --moderate-green: #2bae66;
+  --moderate-green: #0d8844;
   --black: #010b13;
   --white: #fffff0;
   --light-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -292,15 +292,15 @@ a {
   position: fixed;
   bottom: 5px;
   right: 50%;
-  transform: translateX(150%);
+  transform: translateX(100%);
   background-color: var(--light-blue);
   padding: 0.5rem 1rem;
 
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 
-  gap: 2.5rem;
+  gap: 1.5rem;
   font-size: 2.5rem;
 
   padding: 0.25rem 0.5;
@@ -356,7 +356,7 @@ a {
   padding: 1.5rem;
 }
 
-.download-cv-cont {
+.nav-btn-cv-cont {
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -365,26 +365,53 @@ a {
   gap: 0.5rem;
   p {
     font-size: 0.85rem;
-    color: var(--moderate-green);
+    color: var(--primary-color);
     text-align: center;
   }
+  button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    i {
+      font-size: 1rem;
+
+      transition: var(--small-transition);
+      &:active {
+        transform: scale(1.1);
+      }
+    }
+  }
 }
-.download-cv {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  background: none;
-  border: none;
-  cursor: pointer;
-
+.download-cv-cont,
+.save-cv-cont {
+  p {
+    color: var(--moderate-green);
+  }
   i {
-    font-size: 1rem;
     color: var(--moderate-green);
     transition: var(--small-transition);
     &:active {
       color: green;
+      transform: scale(1.1);
+    }
+  }
+}
+
+.open-cv-cont {
+  p {
+    color: var(--blue);
+  }
+  i {
+    color: var(--blue);
+    transition: var(--small-transition);
+    &:active {
+      color: blue;
       transform: scale(1.1);
     }
   }
@@ -406,7 +433,17 @@ a {
     }
   }
   .action-btn-cont {
+    width: min(90%, 30rem);
     transform: translateX(50%);
+  }
+  .nav-btn-cv-cont {
+    p {
+      font-size: 0.75rem;
+      text-align: center;
+    }
+    i {
+      font-size: 0.85rem;
+    }
   }
 
   .toggle-preview-btn-cont {

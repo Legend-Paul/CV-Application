@@ -17,7 +17,7 @@ function App() {
   const [updatedCvDataValues, setUpdatedCvDataValues] = useState({
     ...cvDataValues,
   });
-
+  // localStorage.clear();
   const [activeCvSection, setActiveCvSection] = useState({
     name: initialCvSection,
     index: 0,
@@ -144,10 +144,11 @@ function App() {
       .save();
   }
 
-  window.addEventListener("close", () => {
-    handleLoadCV();
-  });
+  // window.addEventListener("close", () => {
+  //   handleLoadCV();
+  // });
   function handleSaveCV() {
+    console.log(cvDataValues);
     const cvData = {
       cvDataValues,
       updatedCvDataValues,
@@ -178,7 +179,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header handleSaveCV={handleSaveCV} handleLoadCV={handleLoadCV} />
+      <Header />
       <main className="main-content">
         {/* Render Default Cv sections */}
         {inputFieldsDisplay.isVisible && (
@@ -339,7 +340,10 @@ function App() {
         </div>
       </main>
       <div className="action-btn-cont">
-        <div className="download-cv-cont" onClick={handleCvDownload}>
+        <div
+          className="download-cv-cont nav-btn-cv-cont"
+          onClick={handleCvDownload}
+        >
           <button className="download-cv" type="button">
             <i className="bi bi-download"></i>
           </button>
@@ -408,6 +412,18 @@ function App() {
             <p>Hide Cv</p>
           </div>
         )}
+        <div className="save-cv-cont nav-btn-cv-cont" onClick={handleSaveCV}>
+          <button className="btns" type="button">
+            <i className="bi bi-bookmark"></i>
+          </button>
+          <p>Save Cv</p>
+        </div>
+        <div className="open-cv-cont nav-btn-cv-cont" onClick={handleLoadCV}>
+          <button className="open-cv" type="button">
+            <i className="bi bi-file-earmark-check-fill"></i>
+          </button>
+          <p>Open Cv</p>
+        </div>
       </div>
     </div>
   );

@@ -17,10 +17,6 @@ function Header({ handleSaveCV, handleLoadCV }) {
             </h1>
             <p>Fill out the form below to create your CV</p>
           </div>
-          <div className="save-cv-icons">
-            <i class="bi bi-bookmark" onClick={handleSaveCV}></i>
-            <i class="bi bi-file-earmark-check-fill" onClick={handleLoadCV}></i>
-          </div>
         </div>
       </header>
     </>
