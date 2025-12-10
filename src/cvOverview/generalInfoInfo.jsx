@@ -85,6 +85,8 @@ export default function GeneralInfo({
                                   >
                                     {value[1]}
                                   </a>
+                                ) : values === "To" ? (
+                                  "Present"
                                 ) : (
                                   value[1]
                                 )}
