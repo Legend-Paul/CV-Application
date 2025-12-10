@@ -85,9 +85,9 @@ let cvSectionData = [
     ],
   },
   {
-    sectionName: "Work Experience",
+    sectionName: "Experience",
     id: self.crypto.randomUUID(),
-    class: "work-experience cv-section",
+    class: "experience cv-section",
     addsSimalarFields: true,
     mainName: "Experience",
     fields: [
