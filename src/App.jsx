@@ -148,7 +148,6 @@ function App() {
   //   handleLoadCV();
   // });
   function handleSaveCV() {
-    console.log(cvDataValues);
     const cvData = {
       cvDataValues,
       updatedCvDataValues,
